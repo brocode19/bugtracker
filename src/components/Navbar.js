@@ -9,7 +9,7 @@ import { Container } from 'tabler-react';
 function Navbar() {
   return (
 
-    <div className='container'>
+
                       <aside >
               <div className='top'>
                 <div className='logo'>
@@ -40,7 +40,7 @@ function Navbar() {
 
             </aside>  
 
-    </div>
+
 
   )
 }

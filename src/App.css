@@ -104,6 +104,7 @@ aside{
   display: inline-block;
   position: absolute;
   left: 0;
+  background-color: white;
 
 }
 
@@ -142,8 +143,12 @@ aside .sidebar{
   flex-direction: column;
   gap: 0.7rem;
   padding: var(--card-padding);
-  height: 100%;
 
+
+}
+
+.pages{
+  margin-left: 250px;
 }
 
 
