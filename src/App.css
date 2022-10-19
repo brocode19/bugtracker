@@ -96,6 +96,13 @@ b{
   color: var(--colour-warning);
 }
 
+aside{
+
+  height: 100vh;
+  width: 14rem;
+
+}
+
 
 
 
