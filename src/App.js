@@ -10,25 +10,29 @@ import Admin from './components/pages/Admin'
 function App() {
   return (
 
-    <Router>
     <div className='App'>
-      <Navbar/>
+          <Router>
+
+<Navbar/>
+
+<Switch>
+<Route exact path='/'>
+  <Dashboard/>
+</Route>
+<Route path='/Projects'>
+  <Projects/>
+</Route>
+<Route path='/Tickets'>
+  <Tickets/>
+</Route>
+<Route path='/Admin'>
+  <Admin/>
+</Route>
+</Switch>
+</Router>
     </div>
-    <Switch>
-      <Route exact path='/'>
-        <Dashboard/>
-      </Route>
-      <Route path='/Projects'>
-        <Projects/>
-      </Route>
-      <Route path='/Tickets'>
-        <Tickets/>
-      </Route>
-      <Route path='/Admin'>
-        <Admin/>
-      </Route>
-    </Switch>
-    </Router>
+
+
 
     
   );
