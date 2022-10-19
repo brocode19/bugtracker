@@ -31,6 +31,7 @@
   font-family: 'Poppins', sans-serif;
   user-select: none;
   overflow-x: hidden;
+
 }
 
 img{
@@ -99,10 +100,51 @@ b{
 aside{
 
   height: 100vh;
-  width: 14rem;
+  width: 250px;
+  display: inline-block;
+  position: absolute;
+  left: 0;
 
 }
 
+aside .logo img{
+  width: 2rem;
+  height: 2rem;
+}
+
+aside .top{
+ display: flex;
+ align-items: center;
+ justify-content: start;
+ gap: 0.8rem;
+ background-color: white;
+ margin-top: 1.4rem;
+ padding: var(--card-padding);
+}
+
+aside .logo{
+  display: flex;
+  gap: 0.8rem;
+}
+
+aside .close{
+  display: none;
+}
+
+
+/* Sidebar */
+
+aside .sidebar{
+  background-color: white;
+  position: relative;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: var(--card-padding);
+  height: 100%;
+
+}
 
 
 

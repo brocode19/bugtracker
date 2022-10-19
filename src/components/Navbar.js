@@ -4,10 +4,13 @@ import { SidebarData } from './SidebarData';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import logo from '../images/logo.png'
+import { Container } from 'tabler-react';
 
 function Navbar() {
   return (
-              <aside >
+
+    <div className='container'>
+                      <aside >
               <div className='top'>
                 <div className='logo'>
                   <img src={logo} alt=''/>
@@ -36,6 +39,9 @@ function Navbar() {
 
 
             </aside>  
+
+    </div>
+
   )
 }
 
