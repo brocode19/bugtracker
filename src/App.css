@@ -159,7 +159,7 @@ aside .sidebar{
   height: 50px;
   margin-left: 250px;
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
 }
 
@@ -172,6 +172,7 @@ aside .sidebar{
 .menu-bars{
 
   margin-left: 0.5rem;
+  display: none;
 
 }
 
@@ -181,6 +182,35 @@ aside .sidebar{
   text-decoration: none;
 
 }
+
+/* media quiries */
+
+@media screen and (max-width: 1200px){
+
+  .App{
+    background-color: #111e88;
+  }
+
+  .menu-bars{
+    display: inline;
+  }
+
+  .nav-bar{
+    justify-content: space-between;
+    margin: 0;
+  }
+
+  aside{
+    display: none;
+  }
+
+  .pages{
+    margin: 0;
+  }
+  
+}
+
+
 
 
 
