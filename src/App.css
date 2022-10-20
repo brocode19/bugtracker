@@ -61,7 +61,7 @@ h5{
   font-size: 0.77rem;
 }
 
-.small {
+small {
   font-size: 0.75rem;
 }
 
@@ -150,6 +150,32 @@ aside .sidebar{
 .pages{
   margin-left: 250px;
 }
+
+/* top section */
+
+
+.nav-bar{
+  background-color: white;
+  height: 50px;
+  margin-left: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile{
+  display: flex;
+  gap: 0.8rem;
+  margin-right: 0.5rem;
+}
+
+.menu-bars{
+
+  margin-left: 0.5rem;
+
+}
+
+
 
 
 

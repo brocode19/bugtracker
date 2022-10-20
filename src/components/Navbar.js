@@ -4,13 +4,13 @@ import { SidebarData } from './SidebarData';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import logo from '../images/logo.png'
-import { Container } from 'tabler-react';
+import { IconContext } from 'react-icons';
 
 function Navbar() {
   return (
 
-
-                      <aside >
+    <>
+                          <aside >
               <div className='top'>
                 <div className='logo'>
                   <img src={logo} alt=''/>
@@ -39,6 +39,38 @@ function Navbar() {
 
 
             </aside>  
+
+            <div className='nav-bar'>
+
+            <IconContext.Provider
+                value={{ color: 'black', size:'2em' }}
+                >
+                <div className='menu-bars'>                       
+                    <Link to='#' className='menu-bars'><FaIcons.FaBars /></Link>
+                    </div>
+                </IconContext.Provider>
+
+                <div className='user-info'>
+            
+                <div className='profile'>
+                    <div className='infor'>
+                        <p>hey, <b>Tinashe</b> </p>
+    
+                    </div>
+                    <div className='profile-photo'>
+                        <img src={logo} alt='profile pic'/>
+                    </div>
+                </div>
+                    
+
+
+                </div>
+               
+            </div>
+    </>
+
+
+
 
 
 
