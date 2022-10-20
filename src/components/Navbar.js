@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import * as FaIcons from 'react-icons/fa';
@@ -7,17 +7,32 @@ import logo from '../images/logo.png'
 import { IconContext } from 'react-icons';
 
 function Navbar() {
+
+    const [isActive, setIsActive] = useState(false);
+
+    const handleClick = () => {
+      // 👇️ toggle
+      setIsActive(current => !current);
+  
+      // 👇️ or set to true
+      // setIsActive(true);
+    };
+
+
   return (
 
     <>
-                          <aside >
+                          <aside style={{
+          display: isActive ? 'block' : '',
+          
+        }}>
               <div className='top'>
                 <div className='logo'>
                   <img src={logo} alt=''/>
                   <h2>NK<span className='trouble'>Brand</span></h2>
                 </div>
                 <div className='close' id='close-btn'>
-                <AiIcons.AiOutlineClose/>
+                <AiIcons.AiOutlineClose onClick={handleClick}/>
                 </div>
               </div>
 
@@ -52,9 +67,10 @@ function Navbar() {
 
             <IconContext.Provider
                 value={{ color: 'black', size:'2em' }}
+                
                 >
                 <div className='menu-bars'>                       
-                    <Link to='#' className='menu-bars'><FaIcons.FaBars /></Link>
+                    <Link to='#' className='menu-bars'><FaIcons.FaBars onClick={handleClick}/></Link>
                     </div>
                 </IconContext.Provider>
 
