@@ -260,7 +260,14 @@ aside .sidebar{
 }
 
 .project-container{
-  background-color: #7380ec;
+  /* background-color: #7380ec; */
+  height: 50vh;
+  margin-top: 20px;
+}
+
+.projects-table{
+  background-color: white;
+  border-radius: var(--border-radius-1);
   height: 50vh;
 }
 

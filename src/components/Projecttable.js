@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Form, Modal, Table } from 'react-bootstrap';
 import { MultiSelect } from 'react-multi-select-component';
 import Project from './Project';
 import { teamNames } from './TeamData';
 
-function Table(props) {
+function Projecttable(props) {
 
     const [show, setShow] = useState(false);
     // const [projects, setProjects] = useState([]);
@@ -214,7 +214,7 @@ function Table(props) {
   
       
   <div className='container'>
-  <table class="projects-table">         
+  <Table stripped class="projects-table">         
     <thead>
       <tr>
         <th>Project</th>
@@ -249,7 +249,7 @@ function Table(props) {
   
   
     </tbody>
-  </table>
+  </Table>
   </div>
   
   <Button
@@ -263,4 +263,4 @@ function Table(props) {
     )
   }
 
-export default Table
+export default Projecttable

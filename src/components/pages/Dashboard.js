@@ -3,7 +3,8 @@ import { Col, Container, Row } from 'react-bootstrap'
 import 'chart.js/auto'
 import { Pie } from 'react-chartjs-2';
 import Linegraph from '../Linegraph';
-import Table from '../Table'
+import Projecttable from '../Projecttable';
+
 
 
 
@@ -69,7 +70,7 @@ function Dashboard() {
                   </div>
                 </div>
                 <div className='col-4'>
-                <div className='graph'>                    <Pie data={priorityData} options={projectPriorityOptions}></Pie></div>
+                <div className='graph'><Pie data={priorityData} options={projectPriorityOptions}></Pie></div>
                 </div>
                 <div className='col-4'>
                 <div className='graph'>
@@ -93,11 +94,10 @@ function Dashboard() {
         </Row>
         <Row>
           <Col sm={12} md={8}>
-            <div className='project-container'>
+            <div className='project-container align-items-center'>
               <div className='table'>
-              <h3 className='text-start'>Projects</h3>
-      <div className='row'>
-        <Table
+      <div className='projects-table'>  
+        <Projecttable
         setProjects={setProjects}
         setPriorityData={setPriorityData}
         projects={projects}/>
