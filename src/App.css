@@ -116,12 +116,12 @@ aside .logo img{
 
 aside .top{
  display: flex;
- align-items: center;
- justify-content: start;
+ justify-content: center;
  gap: 0.8rem;
  background-color: white;
- margin-top: 1.4rem;
- padding: var(--card-padding);
+ margin-top: 1rem;
+
+
 }
 
 aside .logo{
