@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import 'chart.js/auto'
 import { Pie } from 'react-chartjs-2';
+import Linegraph from '../Linegraph';
 
 
 
@@ -78,8 +79,13 @@ function Dashboard() {
             </div>
           </Col>
           <Col sm={12} lg={4}>
-            <div className='line-graph-container container'>
-              <div className='line-graph'>hey</div>
+            <div className='row'>
+            <div className='line-graph-container align-items-center'>
+              <div className='line-graph'>
+                <Linegraph/>
+              </div>
+            </div>
+
               
             </div>
           </Col>

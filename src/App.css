@@ -247,10 +247,16 @@ aside .sidebar{
 
 .line-graph-container{
   background-color: blue;
+  height: 40vh;
 }
 
 .line-graph{
-  background-color: palevioletred;
+  background-color: white;
+  width: 100%;
+  margin-top: 20px;
+  height: 80%;
+  border-radius: var(--border-radius-1);
+
 }
 
 
