@@ -203,6 +203,15 @@ aside .sidebar{
 
   aside{
     display: none;
+    left: -100px;
+    animation: showMenu 400ms ease forwards;
+  }
+
+  @keyframes showMenu {
+    to{
+      left:0;
+    }
+    
   }
 
   aside .close{

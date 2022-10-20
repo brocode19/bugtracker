@@ -31,9 +31,13 @@ function Navbar() {
                   <img src={logo} alt=''/>
                   <h2>NK<span className='trouble'>Brand</span></h2>
                 </div>
+                <IconContext.Provider
+                value={{ color: 'black', size:'2em' }}>
                 <div className='close' id='close-btn'>
                 <AiIcons.AiOutlineClose onClick={handleClick}/>
                 </div>
+                </IconContext.Provider>
+
               </div>
 
               <div className='sidebar'> 
