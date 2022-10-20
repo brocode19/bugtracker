@@ -90,7 +90,16 @@ function Dashboard() {
             </div>
           </Col>
         </Row>
-        <Row>dash2</Row>
+        <Row>
+          <Col sm={12} md={8}>
+            <div className='project-container'>
+              <div className='table'>
+                
+              </div>
+            </div>
+          </Col>
+          <Col sm={12} md={4}></Col>
+        </Row>
       </Container>
 
 
