@@ -224,6 +224,32 @@ aside .sidebar{
   
 }
 
+/* graphs */
+
+.graph-content{
+  background-color: #111e88;
+  height: 40vh;
+}
+
+.graphs{
+  background-color: #ff7782;
+  height: 40vh;
+}
+
+.graph{
+  height: 100%;
+  background-color: #677483;
+  margin-top: 20px;
+}
+
+.line-graph-container{
+  background-color: blue;
+}
+
+.line-graph{
+  background-color: palevioletred;
+}
+
 
 
 
