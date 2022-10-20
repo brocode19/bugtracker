@@ -93,7 +93,7 @@ function Dashboard() {
           </Col>
         </Row>
         <Row>
-          <Col sm={12} md={8}>
+          <Col sm={12} md={12}>
             <div className='project-container align-items-center'>
               <div className='table'>
       <div className='projects-table'>  
@@ -105,7 +105,7 @@ function Dashboard() {
               </div>
             </div>
           </Col>
-          <Col sm={12} md={4}></Col>
+          {/* <Col sm={12} md={4}></Col> */}
         </Row>
       </Container>
 
