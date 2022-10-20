@@ -23,16 +23,24 @@ function Navbar() {
 
               <div className='sidebar'> 
 
+              <IconContext.Provider
+                value={{ color: '#ff7782' }}
+                >
+
               {SidebarData.map((item, index) => {
               return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path} >
+                <h2 key={index} className={item.cName}>
+                  <Link
+                  style={{textDecoration:"none"}}
+                   to={item.path} >
                     <span className='sidebar-item'>{item.icon}</span>
                     <span className='sidebar-item'>{item.title}</span>
                   </Link>
-                </li>
+                </h2>
               );
             })}
+
+            </IconContext.Provider>
 
               </div>
 
