@@ -1,6 +1,10 @@
 
-import { Container, Typography } from '@mui/material'
+import { Container, Typography, Grid } from '@mui/material'
 import React from 'react'
+import Datacard from '../cards/Datacard'
+
+import * as AiIcons from 'react-icons/ai';
+
 
 function Projects() {
   return (
@@ -9,6 +13,25 @@ function Projects() {
       <Typography variant="h4" sx={{ mb: 5 }}>
           Hi, Welcome back Tanashe
         </Typography>
+
+        <Grid container spacing={3}>
+        <Grid item xs={12} sm={6} md={3}>
+          <Datacard color={'#061B64'} context={'New Projects'} bgcolor={'#D1E9FC'} figure={'500'}></Datacard>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+jk
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+l
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+.
+          </Grid>
+        </Grid>
+
        
       </Container>
 
