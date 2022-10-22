@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
-import 'chart.js/auto'
-import { Pie } from 'react-chartjs-2';
-import Linegraph from '../Linegraph';
-import Projecttable from '../Projecttable';
 
+import { Container, Typography, Grid, Card } from '@mui/material'
+import React, { useState } from 'react'
+import Datacard from '../cards/Datacard'
+
+import * as AiIcons from 'react-icons/ai';
+import * as MdIcons from 'react-icons/md';
+import * as HiIcons from 'react-icons/hi';
+import BarChat from '../Barchat/BarChat';
+import PieChart from '../PieChat/PieChart';
 
 
 
@@ -58,61 +61,45 @@ function Dashboard() {
     };
   return (
     <div className='pages'>
+    <Container maxWidth='xl'>
+    <Typography variant="h4" sx={{ mb: 5 }}>
+        Hi, Welcome back Tanashe
+      </Typography>
 
-      <Container fluid>
-        <Row className='graph-content'>
-          <Col sm={12} lg={8}>
-            <div className='graphs container-fluid'>
-              <div className='row align-items-center '>
-                <div className='col-4'>
-                  <div className='graph'>
-                    <Pie data={priorityData} options={projectPriorityOptions}></Pie>
-                  </div>
-                </div>
-                <div className='col-4'>
-                <div className='graph'><Pie data={priorityData} options={projectPriorityOptions}></Pie></div>
-                </div>
-                <div className='col-4'>
-                <div className='graph'>
-                <Pie data={priorityData} options={projectPriorityOptions}></Pie>
-                </div>
-                </div>
-              </div>
-            </div>
-          </Col>
-          <Col sm={12} lg={4}>
-            <div className='row'>
-            <div className='line-graph-container align-items-center'>
-              <div className='line-graph'>
-                <Linegraph/>
-              </div>
-            </div>
+      <Grid container spacing={3}>
+      <Grid item xs={12} sm={6} md={3}>
+        <Datacard iconCircle={'#BDD7F1'} color={'#061B64'} context={'New Projects'} bgcolor={'#D1E9FC'} figure={'500'} icon={<AiIcons.AiOutlineFundProjectionScreen/>}></Datacard>
+        </Grid>
 
-              
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={12} md={12}>
-            <div className='project-container align-items-center'>
-              <div className='table'>
-      <div className='projects-table'>  
-        <Projecttable
-        setProjects={setProjects}
-        setPriorityData={setPriorityData}
-        projects={projects}/>
-        </div>
-              </div>
-            </div>
-          </Col>
-          {/* <Col sm={12} md={4}></Col> */}
-        </Row>
-      </Container>
+        <Grid item xs={12} sm={6} md={3}>
+        <Datacard iconCircle={'#C1E6F9'} color={'#04297A'} context={'Priority Projects'} bgcolor={'#D0F2FF'} figure={'7'} icon={<MdIcons.MdPriorityHigh/>}></Datacard>
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3}>
+        <Datacard iconCircle={'#F9EEBD'} color={'#7A4F01'} context={'Tickets'} bgcolor={'#FFF7CD'} figure={'20'} icon={<HiIcons.HiOutlineTicket/>}></Datacard>
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3}>
+        <Datacard iconCircle={'#F7D1C7'} color={'#7A0C2E'} context={'Bug Issues'} bgcolor={'#FFE7D9'} figure={'69'} icon={<AiIcons.AiOutlineBug/>}></Datacard>
+        </Grid>
+      </Grid>
+
+      <Grid sx={{py:3}} container spacing={3}>
+      <Grid item xs={12} md={6} lg={8}>
+        <BarChat/>
+      </Grid>
+      <Grid item xs={12} md={6} lg={4}>
+         <PieChart/>
+
+      </Grid>
+      </Grid>
 
 
-      
 
-      </div>
+     
+    </Container>
+
+  </div>
   )
 }
 

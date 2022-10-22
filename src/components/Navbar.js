@@ -5,6 +5,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import logo from '../images/logo.png'
 import { IconContext } from 'react-icons';
+import { Typography } from '@mui/material';
 
 function Navbar() {
 
@@ -95,6 +96,7 @@ function Navbar() {
                 </div>
                
             </div>
+
     </>
 
 

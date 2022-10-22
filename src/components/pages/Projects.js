@@ -8,6 +8,7 @@ import * as MdIcons from 'react-icons/md';
 import * as HiIcons from 'react-icons/hi';
 import BarChat from '../Barchat/BarChat';
 import PieChart from '../PieChat/PieChart';
+import Spline from '../SplineGraph/Spline';
 
 
 
@@ -19,27 +20,10 @@ function Projects() {
           Hi, Welcome back Tanashe
         </Typography>
 
-        <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} md={3}>
-          <Datacard iconCircle={'#BDD7F1'} color={'#061B64'} context={'New Projects'} bgcolor={'#D1E9FC'} figure={'500'} icon={<AiIcons.AiOutlineFundProjectionScreen/>}></Datacard>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-          <Datacard iconCircle={'#C1E6F9'} color={'#04297A'} context={'Priority Projects'} bgcolor={'#D0F2FF'} figure={'7'} icon={<MdIcons.MdPriorityHigh/>}></Datacard>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-          <Datacard iconCircle={'#F9EEBD'} color={'#7A4F01'} context={'Tickets'} bgcolor={'#FFF7CD'} figure={'20'} icon={<HiIcons.HiOutlineTicket/>}></Datacard>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-          <Datacard iconCircle={'#F7D1C7'} color={'#7A0C2E'} context={'Bug Issues'} bgcolor={'#FFE7D9'} figure={'69'} icon={<AiIcons.AiOutlineBug/>}></Datacard>
-          </Grid>
-        </Grid>
 
         <Grid sx={{py:3}} container spacing={3}>
         <Grid item xs={12} md={6} lg={8}>
-          <BarChat/>
+          <Spline/>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
            <PieChart/>
