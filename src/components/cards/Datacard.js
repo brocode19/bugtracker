@@ -31,7 +31,8 @@ function Datacard(props) {
                     <div className='cardIcon d-flex justify-content-center align-items-center'>
                     <IconContext.Provider
                     value={{ color: 'black', size:'1.5em' }}>
-                    <AiIcons.AiOutlineBug/>
+                    
+                    {props.icon}
                     </IconContext.Provider>
                         
 
