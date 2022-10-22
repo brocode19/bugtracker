@@ -1,11 +1,13 @@
 
-import { Container, Typography, Grid } from '@mui/material'
+import { Container, Typography, Grid, Card } from '@mui/material'
 import React from 'react'
 import Datacard from '../cards/Datacard'
 
 import * as AiIcons from 'react-icons/ai';
 import * as MdIcons from 'react-icons/md';
 import * as HiIcons from 'react-icons/hi';
+import BarChat from '../Barchat/BarChat';
+import PieChart from '../PieChat/PieChart';
 
 
 
@@ -34,6 +36,18 @@ function Projects() {
           <Datacard iconCircle={'#F7D1C7'} color={'#7A0C2E'} context={'Bug Issues'} bgcolor={'#FFE7D9'} figure={'69'} icon={<AiIcons.AiOutlineBug/>}></Datacard>
           </Grid>
         </Grid>
+
+        <Grid sx={{py:3}} container spacing={3}>
+        <Grid item xs={12} md={6} lg={8}>
+          <BarChat/>
+        </Grid>
+        <Grid item xs={12} md={6} lg={4}>
+           <PieChart/>
+
+        </Grid>
+        </Grid>
+
+
 
        
       </Container>
