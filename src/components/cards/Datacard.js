@@ -28,9 +28,10 @@ function Datacard(props) {
             bgcolor: props.bgcolor,}}>
 
                 <div className='d-flex justify-content-center align-items-center'>
-                    <div className='cardIcon d-flex justify-content-center align-items-center'>
+                    <div className='cardIcon d-flex justify-content-center align-items-center'
+                    style={{  backgroundColor: props.iconCircle}}>
                     <IconContext.Provider
-                    value={{ color: 'black', size:'1.5em' }}>
+                    value={{ color: props.color, size:'1.5em' }}>
                     
                     {props.icon}
                     </IconContext.Provider>
