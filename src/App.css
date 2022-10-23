@@ -168,6 +168,10 @@ aside .sidebar{
   align-items: center;
 }
 
+.navigation-items{
+  display: flex;
+}
+
 .profile{
   display: flex;
   gap: 0.8rem;
@@ -183,7 +187,7 @@ aside .sidebar{
 
 .sidebar-item{
   margin-right: 0.8rem;
-  color: #363949;
+  color: #082f83;
   text-decoration: none;
 
 }

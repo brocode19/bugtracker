@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import logo from '../images/logo.png'
+import logo from './avatars/avatar_default.jpg'
 import { IconContext } from 'react-icons';
 import { Typography } from '@mui/material';
 
@@ -29,7 +29,7 @@ function Navbar() {
         }}>
               <div className='top'>
                 <div className='logo'>
-                  <img src={logo} alt=''/>
+                  <img className='profile-photo' src={logo} alt='logo'/>
                   <h2>NK<span className='trouble'>Brand</span></h2>
                 </div>
                 <IconContext.Provider
@@ -53,8 +53,11 @@ function Navbar() {
                   <Link
                   style={{textDecoration:"none"}}
                    to={item.path} >
+                    <div className='navigation-items '>
                     <span className='sidebar-item'>{item.icon}</span>
-                    <span className='sidebar-item'>{item.title}</span>
+                    <h2 className='sidebar-item'>{item.title}</h2>
+                    </div>
+                    
                   </Link>
                 </div>
               );
@@ -87,7 +90,7 @@ function Navbar() {
     
                     </div>
                     <div className='profile-photo'>
-                        <img src={logo} alt='profile pic'/>
+                        <img className='profile-photo' src={logo} alt='profile pic'/>
                     </div>
                 </div>
                     
