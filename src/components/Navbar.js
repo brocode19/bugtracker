@@ -49,14 +49,14 @@ function Navbar() {
 
               {SidebarData.map((item, index) => {
               return (
-                <h2 key={index} className={item.cName}>
+                <div key={index} className={item.cName}>
                   <Link
                   style={{textDecoration:"none"}}
                    to={item.path} >
                     <span className='sidebar-item'>{item.icon}</span>
                     <span className='sidebar-item'>{item.title}</span>
                   </Link>
-                </h2>
+                </div>
               );
             })}
 

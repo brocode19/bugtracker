@@ -104,7 +104,8 @@ aside{
   display: inline-block;
   position: fixed;
   left: 0;
-  background-color: white;
+  background-color: #F6F6F9;
+  border-right: 2px #E0E4E8 dotted;
 
 }
 
@@ -119,6 +120,7 @@ aside .top{
  justify-content: center;
  gap: 0.8rem;
  background-color: white;
+ background-color: #F6F6F9;
  margin-top: 1rem;
 
 
@@ -138,6 +140,7 @@ aside .close{
 
 aside .sidebar{
   background-color: white;
+  background-color: #F6F6F9;
   position: relative;
   top: 5rem;
   display: flex;
@@ -157,6 +160,7 @@ aside .sidebar{
 
 .nav-bar{
   background-color: white;
+  background-color: #F6F6F9;
   height: 50px;
   margin-left: 250px;
   display: flex;
@@ -284,6 +288,7 @@ aside .sidebar{
 
 .charts{
   background-color: white;
+  
 }
 
 
