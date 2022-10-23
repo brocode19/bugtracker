@@ -1,48 +1,12 @@
 
 import React, { useState } from 'react'
-import { DataGrid } from '@mui/x-data-grid';
+// import { DataGrid } from '@mui/x-data-grid';
 import { Card } from '@mui/material';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Form, Modal, Table,} from 'react-bootstrap';
 import { MultiSelect } from 'react-multi-select-component';
-
-const columns = [
-  { field: 'id', headerName: 'ID', width: 50 },
-  { field: 'Name', headerName: 'Name', width: 130 },
-  { field: 'Priority', headerName: 'Priority', width: 100 },
-  { field: 'Type', headerName: 'Type', width: 100 },
-  { field: 'Status', headerName: 'Status', width: 100 },
-  { field: 'Detail', headerName: 'Detail', width: 250 },
-  { field: 'Team', headerName: 'Team', width: 150 },
-  { field: 'Actions', headerName: 'Actions', width: 100, },
-  // {
-  //   field: 'age',
-  //   headerName: 'Age',
-  //   type: 'number',
-  //   width: 90,
-  // },
-  // {
-  //   field: 'fullName',
-  //   headerName: 'Full name',
-  //   description: 'This column has a value getter and is not sortable.',
-  //   sortable: false,
-  //   width: 160,
-  // }
-];
-
-
-
-// const rows = [
-//   { id: 1, Name: 'Snow', Priority: 'Jon', Type: 35, Status: 'Jon', Detail: 'Jon', Team: 'Jon',Actions: 'Jon',},
-//   { id: 2, Name: 'Snow', Priority: 'Jon', Type: 35, Status: 'Jon', Detail: 'Jon', Team: 'Jon',Actions: 'Jon',},
-//   { id: 3, Name: 'Snow', Priority: 'Jon', Type: 35, Status: 'Jon', Detail: 'Jon', Team: 'Jon',Actions: 'Jon',},
-//   { id: 4, Name: 'Snow', Priority: 'Jon', Type: 35, Status: 'Jon', Detail: 'Jon', Team: 'Jon',Actions: 'Jon',},
-//   { id: 5, Name: 'Snow', Priority: 'Jon', Type: 35, Status: 'Jon', Detail: 'Jon', Team: 'Jon',Actions: 'Jon',},
-//   { id: 6, Name: 'Snow', Priority: 'Jon', Type: 35, Status: 'Jon', Detail: 'Jon', Team: 'Jon',Actions: 'Jon',},
-//   { id: 7, Name: 'Snow', Priority: 'Jon', Type: 35, Status: 'Jon', Detail: 'Jon', Team: 'Jon',Actions: 'Jon',},
-
-
-  
-// ];
+import Project from './Project';
+// import * as MdIcons from "react-icons/md";
+// import * as AiIcons from 'react-icons/ai';
 
 
 
@@ -51,14 +15,11 @@ function Projectstable(props) {
   const options = [
     { label: "Grapes 🍇", value: "grapes" },
     { label: "Mango 🥭", value: "mango" },
-    { label: "Strawberry 🍓", value: "strawberry", disabled: true },
+    { label: "Strawberry 🍓", value: "strawberry",},
   ];
-
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState([]);
   const [edit, setEdit] = useState(false);
-
-
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true); 
@@ -72,14 +33,7 @@ function Projectstable(props) {
       team:'',
     });
 
-    const [things,setThings] = useState([])
     const [projects, setProjects] = useState([]);
-
-
-
-
-
-
 
     function handleChange(event) {
       const { name, value } = event.target;
@@ -98,25 +52,7 @@ function Projectstable(props) {
   function submitProject(event) {
 
     setEdit(false);
-
-    setProjects((prevProjects) => [...prevProjects,projectInput]);
-
-    
-
-    setThings(projects.map((item,index) => (
-      { 
-        id: index,
-        Name: item.name,
-         Priority: item.priority,
-          Type: item.type,
-           Status: item.status,
-            Detail: item.details,
-             Team: '',
-             Actions: '',}
-    ))) 
-
-    console.log(things);
-    
+    setProjects((prevProjects) => [...prevProjects,projectInput]);  
     setProjectInput({
     name: "",
     priority: "",
@@ -125,50 +61,78 @@ function Projectstable(props) {
     details: "",
  
     })
-
     setSelected([]); 
     event.preventDefault()
     
   }
 
-  // function deleteNote(id){
-  //   props.setProjects(prevProject => {
-  //     return prevProject.filter((projectItem, index) => {
-  //       return index !== id;
-  //     });
-  //   });
-  // }
-
-  // function editProject(id){
-
-  //   setEdit(true);
+  function editProject(id){
+  
+    setEdit(true);
 
 
-  //   props.setProjects(prevProject => {
-  //     return prevProject.filter((noteItem, index) => {
-  //       return index !== id;
-  //     });
-  //   });
+    setProjects(prevProject => {
+      return prevProject.filter((noteItem, index) => {
+        return index !== id;
+      });
+    });
 
-  //   const item = props.projects.find((noteItem, index) => {
-  //     return index === id;
-  //   })
+    const item = projects.find((noteItem, index) => {
+      return index === id;
+    })
 
-  //   setProjectInput({
-  //     name: item.name,
-  //     priority: item.priority,
-  //     status: item.status,
-  //     type:item.type,
-  //     details: item.details,
-  //     team:item.team,
+    console.log(item.team, 'hey');
+
+
+    setProjectInput({
+      name: item.name,
+      priority: item.priority,
+      status: item.status,
+      type:item.type,
+      details: item.details,
+      team:item.team,
       
-  //   })
-  //   setSelected(item.team);
-  // }
+    })
+    setSelected(item.team);
+  }
 
+  function deleteNote(id){
+    setProjects(prevProject => {
+      return prevProject.filter((projectItem, index) => {
+        return index !== id;
+      });
+    });
+  }
 
+  // const allProjects = projects.map((item,index) => (
+  //   { 
+  //     id: index,
+  //     Name: item.name,
+  //      Priority: item.priority,
+  //       Type: item.type,
+  //        Status: item.status,
+  //         Detail: item.details,
+  //          Team: '',
+  //          Actions: '',
+  //         }
+  // ))
 
+  // const columns = [
+  //   { field: 'id', headerName: 'ID', width: 50 },
+  //   { field: 'Name', headerName: 'Name', width: 130 },
+  //   { field: 'Priority', headerName: 'Priority', width: 100 },
+  //   { field: 'Type', headerName: 'Type', width: 100 },
+  //   { field: 'Status', headerName: 'Status', width: 100 },
+  //   { field: 'Detail', headerName: 'Detail', width: 250 },
+  //   { field: 'Team', headerName: 'Team', width: 150 },
+  //   {
+  //     field: 'Actions',
+  //     headerName: 'Actions',
+  //     width: 150,
 
+  //   },
+  // ];
+  
   return (
     <>
 
@@ -258,28 +222,56 @@ function Projectstable(props) {
 
 <Card
     sx={{
-      py: 5,
+      py: 1,
       color: 'grey',
-      bgcolor: 'white'}}>
+      }}>
         <div style={{ height: 400, width: '100%' }}>
         <Button variant="primary"size="sm"onClick={handleShow}> Add Project</Button>
-      <DataGrid
-        rows={projects.map((item,index) => (
-          { 
-            id: index,
-            Name: item.name,
-             Priority: item.priority,
-              Type: item.type,
-               Status: item.status,
-                Detail: item.details,
-                 Team: '',
-                 Actions: '',}
-        ))}
+
+        <Table striped class="projects-table">         
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>priority</th>
+      <th>Status</th>
+      <th>type</th>
+      <th>detail</th>
+      <th>team</th>
+      <th>actions</th>   
+    </tr>
+  </thead>
+  <tbody>
+
+  {projects.map((projectItem, index) => {
+        return (
+          <Project
+            key={index}
+            id={index}
+            name={projectItem.name}
+            priority={projectItem.priority}
+            status={projectItem.status}
+            type={projectItem.type}
+            team={projectItem.team}
+            details={projectItem.details}
+            onDelete={deleteNote}
+            onEdit={handleShow}
+            editProject={editProject}
+          />
+        );
+      })}
+
+
+
+  </tbody>
+</Table>
+
+      {/* <DataGrid
+        rows={allProjects}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
         checkboxSelection
-      />
+      /> */}
 
     </div>
       </Card>

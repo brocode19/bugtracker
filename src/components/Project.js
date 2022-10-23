@@ -37,12 +37,15 @@ const teamNames = props.team.map(item => item.value);
 <Button
  variant="secondary"
  onClick={handleClick}
- size="sm">
+ size="sm"
+ 
+ >
   <MdIcons.MdDelete/>
   </Button>
   
   <Button
  variant="secondary"
+ style={{ marginLeft: 16 }}
  onClick={handleShow}
  size="sm">
   <AiIcons.AiFillEdit/> 

@@ -98,32 +98,7 @@ function Table(props) {
         });
       }
   
-      function editProject(id){
-  
-        setEdit(true);
-  
-  
-        props.setProjects(prevProject => {
-          return prevProject.filter((noteItem, index) => {
-            return index !== id;
-          });
-        });
-  
-        const item = props.projects.find((noteItem, index) => {
-          return index === id;
-        })
-  
-        setProjectInput({
-          name: item.name,
-          priority: item.priority,
-          status: item.status,
-          type:item.type,
-          details: item.details,
-          team:item.team,
-          
-        })
-        setSelected(item.team);
-      }
+
   
     return (
   
