@@ -9,6 +9,7 @@ import * as HiIcons from 'react-icons/hi';
 import BarChat from '../Barchat/BarChat';
 import PieChart from '../PieChat/PieChart';
 import Spline from '../SplineGraph/Spline';
+import Projectstable from '../Projectstable';
 
 
 
@@ -21,7 +22,7 @@ function Projects() {
         </Typography>
 
 
-        <Grid sx={{py:3}} container spacing={3}>
+        <Grid container spacing={3}>
         <Grid item xs={12} md={6} lg={8}>
           <Spline/>
         </Grid>
@@ -29,7 +30,16 @@ function Projects() {
            <PieChart/>
 
         </Grid>
+
         </Grid>
+
+        <Grid sx={{py:3}} container spacing={3}>
+        <Grid item xs={12} md={12} lg={12}>
+        <Projectstable/>
+        </Grid>
+
+        </Grid>
+
 
 
 

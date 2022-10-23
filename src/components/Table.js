@@ -4,6 +4,7 @@ import { MultiSelect } from 'react-multi-select-component';
 import Project from './Project';
 import { teamNames } from './TeamData';
 
+
 function Table(props) {
 
     const [show, setShow] = useState(false);
@@ -214,7 +215,7 @@ function Table(props) {
   
       
   <div className='container'>
-  <table class="projects-table">         
+  <Table class="projects-table">         
     <thead>
       <tr>
         <th>Project</th>
@@ -249,7 +250,7 @@ function Table(props) {
   
   
     </tbody>
-  </table>
+  </Table>
   </div>
   
   <Button

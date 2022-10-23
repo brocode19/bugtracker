@@ -43,7 +43,7 @@ function Spline() {
       py: 5,
       color: 'grey',
       bgcolor: 'white'}}>
-                  <ReactApexChart options={spline.options} series={spline.series} type="area" height={350} /> />
+                  <ReactApexChart options={spline.options} series={spline.series} type="area" height={350} /> 
       </Card>
 
 

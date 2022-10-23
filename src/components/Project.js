@@ -32,8 +32,6 @@ const teamNames = props.team.map(item => item.value);
 <td>{props.type}</td>
 <td>{props.details}</td>
 <td>{teamNames.map(item => <span className='text-muted'>{item}{' '}</span>)}</td>
-{/* {team.map(item => <span className='text-muted'>{item}{' '}</span>)} */}
-
 <td>
 
 <Button
