@@ -8,7 +8,6 @@ import { teamNames } from './TeamData';
 function Table(props) {
 
     const [show, setShow] = useState(false);
-    // const [projects, setProjects] = useState([]);
     const [selected, setSelected] = useState([]);
     const [edit, setEdit] = useState(false);
   
