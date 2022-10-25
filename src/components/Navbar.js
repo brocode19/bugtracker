@@ -30,7 +30,7 @@ function Navbar() {
               <div className='top'>
                 <div className='logo'>
                   <img className='profile-photo' src={logo} alt='logo'/>
-                  <h2>NK<span className='trouble'>Brand</span></h2>
+                  <h2>NK<span className='main'>Brand</span></h2>
                 </div>
                 <IconContext.Provider
                 value={{ color: 'black', size:'2em' }}>
@@ -44,7 +44,7 @@ function Navbar() {
               <div className='sidebar'> 
 
               <IconContext.Provider
-                value={{ color: '#ff7782' }}
+                value={{ color: '' }}
                 >
 
               {SidebarData.map((item, index) => {
@@ -71,7 +71,7 @@ function Navbar() {
 
             </aside>  
 
-            <div className='nav-bar'>
+            <div className='nav-bar pages'>
 
             <IconContext.Provider
                 value={{ color: 'black', size:'2em' }}
@@ -82,7 +82,7 @@ function Navbar() {
                     </div>
                 </IconContext.Provider>
 
-                <div className='user-info'>
+                <div className='user-info me-4'>
             
                 <div className='profile'>
                     <div className='infor'>

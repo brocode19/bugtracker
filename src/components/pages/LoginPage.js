@@ -9,10 +9,10 @@ import {
 }
 from 'mdb-react-ui-kit';
 
-function Tickets() {
+function LoginPage() {
   return (
     <div className='LoginPage'>
-      <MDBContainer fluid>
+              <MDBContainer fluid>
       <MDBRow>
 
         <MDBCol sm='6'>
@@ -49,4 +49,4 @@ function Tickets() {
   )
 }
 
-export default Tickets
+export default LoginPage

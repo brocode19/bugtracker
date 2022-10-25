@@ -6,15 +6,14 @@ import Dashboard from './components/pages/Dashboard';
 import Projects from './components/pages/Projects';
 import Tickets from './components/pages/Tickets'
 import Admin from './components/pages/Admin'
+import { LoginPage } from 'tabler-react';
 
 function App() {
   return (
 
-    <div className='App'>
+    <div className='App' >
           <Router>
-
 <Navbar/>
-
 <Switch>
 <Route exact path='/'>
   <Dashboard/>
@@ -27,6 +26,9 @@ function App() {
 </Route>
 <Route path='/Admin'>
   <Admin/>
+</Route>
+<Route path='/LoginPage'>
+  <LoginPage/>
 </Route>
 </Switch>
 </Router>
