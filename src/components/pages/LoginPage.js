@@ -14,7 +14,7 @@ import {getAuth} from '../firebase';
 import { useNavigate } from 'react-router-dom';
 
 
-function LoginPage() {
+function LoginPage(props) {
   const [error,setError] = useState(false)
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
@@ -30,6 +30,8 @@ function LoginPage() {
     .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
+    props.setUser(true)
+
     navigate('/')
 
 
