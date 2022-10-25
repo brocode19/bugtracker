@@ -10,14 +10,16 @@ import {
 from 'mdb-react-ui-kit';
 import { Button } from 'react-bootstrap';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import {getAuth} from '../firebase'
-import {useNavigate} from 'react-router-dom'
+import {getAuth} from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 
 function LoginPage() {
   const [error,setError] = useState(false)
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
+
+  const navigate = useNavigate()
 
   const handleSubmit = (e) =>{
     e.preventDefault()
@@ -28,6 +30,8 @@ function LoginPage() {
     .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
+    navigate('/')
+
 
 
   })
