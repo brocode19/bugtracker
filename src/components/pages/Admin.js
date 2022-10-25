@@ -13,11 +13,36 @@ import {
 }
 from 'mdb-react-ui-kit';
 import { Button } from 'react-bootstrap';
-import { addDoc, collection, doc, serverTimestamp, setDoc, getDoc } from "firebase/firestore"; 
+import { addDoc, collection, doc, serverTimestamp, setDoc, getDocs } from "firebase/firestore"; 
 import {  createUserWithEmailAndPassword } from "firebase/auth";
+import { async } from '@firebase/util';
 
 function Admin() {
 
+  useEffect(() => {
+
+    const fetchData = async () =>{
+
+      let list = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        list.push({id: doc.id,...doc.data()})
+        console.log(list);
+
+});
+      
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+
+
+    fetchData()
+  }, [])
 
   
 
@@ -81,11 +106,11 @@ function Admin() {
       </MDBCol>
 
       <MDBCol col='6'>
-        <MDBInput wrapperClass='mb-4' value={newUser.lname} name='lname' onChange={handleChange} label='Last name' id='form1' type='text'/>
+        <MDBInput wrapperClass='mb-4' value={newUser.lname} name='lname' onChange={handleChange} label='Last name' id='form4r1' type='text'/>
       </MDBCol>
     </MDBRow>
 
-    <MDBInput wrapperClass='mb-4' value={newUser.email} name='email' onChange={handleChange} label='Email' id='form1' type='email'/>
+    <MDBInput wrapperClass='mb-4' value={newUser.email} name='email' onChange={handleChange} label='Email' id='form51' type='email'/>
     <MDBInput wrapperClass='mb-4' value={newUser.password} name='password' onChange={handleChange} label='Password' id='form2' type='password'/>
 
 
