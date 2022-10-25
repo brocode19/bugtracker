@@ -11,13 +11,13 @@ from 'mdb-react-ui-kit';
 import { Button } from 'react-bootstrap';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {getAuth} from '../firebase'
+import {useNavigate} from 'react-router-dom'
 
 
 function LoginPage() {
   const [error,setError] = useState(false)
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
-
 
   const handleSubmit = (e) =>{
     e.preventDefault()
@@ -28,12 +28,11 @@ function LoginPage() {
     .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
-    console.log(user);
-    // ...
+
+
   })
   .catch((error) => {
 
-    setError(true)
   });
 
 
