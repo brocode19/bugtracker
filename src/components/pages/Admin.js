@@ -2,7 +2,7 @@ import React from 'react'
 
 function Admin() {
   return (
-    <div className='pages'>Admin</div>
+    <div className='pages mt-5'>Admin</div>
   )
 }
 

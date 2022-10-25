@@ -60,7 +60,7 @@ function Dashboard() {
       },
     };
   return (
-    <div className='pages'>
+    <div className='pages mt-5'>
     <Container maxWidth='xl'>
     <Typography variant="h4" sx={{ mb: 5 }}>
         Hi, Welcome back Tanashe

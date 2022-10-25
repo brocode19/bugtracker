@@ -12,7 +12,7 @@ from 'mdb-react-ui-kit';
 function LoginPage() {
   return (
     <div className='LoginPage'>
-              <MDBContainer fluid>
+      <MDBContainer fluid>
       <MDBRow>
 
         <MDBCol sm='6'>

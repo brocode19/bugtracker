@@ -4,16 +4,17 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Navbar from './components/Navbar';
 import Dashboard from './components/pages/Dashboard';
 import Projects from './components/pages/Projects';
-import Tickets from './components/pages/Tickets'
 import Admin from './components/pages/Admin'
-import { LoginPage } from 'tabler-react';
+import LoginPage from './components/pages/LoginPage';
+import Tickets from './components/pages/Tickets';
 
 function App() {
   return (
 
-    <div className='App' >
-          <Router>
+
+<Router>
 <Navbar/>
+<div className='App'>
 <Switch>
 <Route exact path='/'>
   <Dashboard/>
@@ -22,17 +23,18 @@ function App() {
   <Projects/>
 </Route>
 <Route path='/Tickets'>
-  <Tickets/>
+<Tickets/>
 </Route>
 <Route path='/Admin'>
   <Admin/>
 </Route>
 <Route path='/LoginPage'>
-  <LoginPage/>
+<LoginPage/>
 </Route>
 </Switch>
+</div>
 </Router>
-    </div>
+
 
 
 
