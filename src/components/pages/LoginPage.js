@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   MDBBtn,
   MDBContainer,
@@ -8,8 +8,36 @@ import {
   MDBInput
 }
 from 'mdb-react-ui-kit';
+import { Button } from 'react-bootstrap';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import {getAuth} from '../firebase'
+
 
 function LoginPage() {
+  const [error,setError] = useState(false)
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+
+
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+
+    const auth = getAuth();
+
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    // ...
+  })
+  .catch((error) => {
+
+    setError(true)
+  });
+
+
+  }
   return (
     <div className='LoginPage'>
       <MDBContainer fluid>
@@ -26,10 +54,11 @@ function LoginPage() {
 
             <h3 className="fw-normal mb-3 ps-5 pb-3" style={{letterSpacing: '1px'}}>Log in</h3>
 
-            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Email address' id='formControlLg' type='email' size="lg"/>
-            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Password' id='formControlLg' type='password' size="lg"/>
+            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Email address' id='formControlLg' type='email' size="lg" onChange={e=>setEmail(e.target.value)}/>
+            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Password' id='formControlLg1' type='password' size="lg" onChange={e=>setPassword(e.target.value)}/>
 
-            <MDBBtn className="mb-4 px-5 mx-5 w-100" color='info' size='lg'>Login</MDBBtn>
+            <Button type='submint' onClick={handleSubmit} className="mb-4 px-5 mx-5 w-100" color='info' size='lg'>Login</Button>
+            {error && <p className='ms-5 trouble'>Incorrect email or password</p>}
             <p className="small mb-5 pb-lg-3 ms-5"><a class="text-muted" href="#!">Forgot password?</a></p>
             <p className='ms-5'>Don't have an account? <a href="#!" class="link-info">Register here</a></p>
 
