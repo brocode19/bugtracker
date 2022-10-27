@@ -1,28 +1,51 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { Button } from 'react-bootstrap';
+import * as MdIcons from "react-icons/md";
+import * as AiIcons from 'react-icons/ai';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 
 
 function Tickets() {
+
+  useEffect(() => {
+
+    const fetchData = async () =>{
+
+      let list = [];
+      try {        
+        const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+          list.push({id: doc.id,...doc.data()})
+          setTeamMember(list)
+        
+        });
+      
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+
+
+    fetchData()
+  }, [])
+
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
     {
-      field: 'firstName',
+      field: 'fname',
       headerName: 'First name',
-      width: 150,
+      width: 200,
       editable: true,
     },
     {
-      field: 'lastName',
+      field: 'lname',
       headerName: 'Last name',
-      width: 150,
-      editable: true,
-    },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 110,
+      width: 200,
       editable: true,
     },
     {
@@ -30,29 +53,62 @@ function Tickets() {
       headerName: 'Full name',
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
-      width: 160,
+      width: 200,
       valueGetter: (params) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+        `${params.row.fname || ''} ${params.row.lname || ''}`,
     },
+    {
+      field: 'email',
+      headerName: 'Email',
+      width: 240,
+      editable: true,
+    },
+ 
   ];
   
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
+  const [teamMember, setTeamMember] = useState([]);
+
+
+  
+  const handleClick = (id) =>{
+
+    console.log(id);
+
+  }
+
+  const actionColumn = [{
+    field: 'action',
+      headerName: 'Action',
+      width: 90,
+      renderCell:(params)=>{
+        return (<>
+        <Button
+ variant="secondary"
+ onClick={()=>handleClick(params.row.id)}
+ size="sm"
+ 
+ 
+ >
+  <MdIcons.MdDelete/>
+  </Button>
+  
+  <Button
+ variant="secondary"
+ style={{ marginLeft: 10 }}
+ onClick={handleClick}
+ size="sm">
+  <AiIcons.AiFillEdit/> 
+  </Button>
+        </>)
+      }
+
+  }]
   return (
     <div className='pages mt-5'>
-          <Box sx={{ height: 400, width: '100%',backgroundColor:'white' }}>
+          <Box sx={{ py:2,height: 450,backgroundColor:'white' }}>
       <DataGrid
-        rows={rows}
-        columns={columns}
+        rows={teamMember}
+        columns={columns.concat(actionColumn)}
         pageSize={5}
         rowsPerPageOptions={[5]}
         checkboxSelection
