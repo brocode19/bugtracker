@@ -16,6 +16,7 @@ import { Button } from 'react-bootstrap';
 import { addDoc, collection, doc, serverTimestamp, setDoc, getDocs } from "firebase/firestore"; 
 import {  createUserWithEmailAndPassword } from "firebase/auth";
 import { async } from '@firebase/util';
+import { Box } from '@mui/material';
 
 function Admin() {
 
@@ -91,7 +92,8 @@ function Admin() {
   }
   return (
     <div className='pages mt-5'>
-       <MDBContainer fluid>
+      <Box sx={{ height: "100%", width: '100%',backgroundColor:'white' }}>
+      <MDBContainer fluid>
 
 <div className="p-5 bg-image" style={{backgroundImage: 'url(https://mdbootstrap.com/img/new/textures/full/171.jpg)', height: '300px'}}></div>
 
@@ -143,6 +145,8 @@ function Admin() {
 </MDBCard>
 
        </MDBContainer>
+      </Box>
+
     </div>
   )
 }

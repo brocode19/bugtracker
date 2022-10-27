@@ -14,51 +14,14 @@ import PieChart from '../PieChat/PieChart';
 function Dashboard() {
   const [projects, setProjects] = useState([]);
 
-  const priorityProjectsAmount = projects.filter(project => project.priority === 'high').length
+  const priorityProjects = projects.filter(project => project.priority === 'high').length
+  const totalProjects = projects.length
+  const totalBugs =  projects.filter(project => project.type === 'bug').length
+  const totalFeatures =  projects.filter(project => project.type === 'feature').length
+  const totalIssues =  projects.filter(project => project.type === 'issue').length
+  // const totalTickets = tickets.length
+
    
-
-
-  const [priorityData, setPriorityData] = useState({
-    labels: ['high', 'medium', 'low'],
-    datasets: [
-      {
-        label: '# of Votes',
-        data: [priorityProjectsAmount, 2, 5],
-        backgroundColor: [
-  
-          // 'red',
-          // 'blue',
-          // '#41f1b6'
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  });
-
-  const projectPriorityOptions = {
-
-    // maintainAspectRatio: false,
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'right',
-        },
-        title: {
-          display: true,
-          text: 'Projects by Priority',
-          align: 'start'
-        },
-      },
-    };
   return (
     <div className='pages mt-5'>
     <Container maxWidth='xl'>
@@ -68,7 +31,7 @@ function Dashboard() {
 
       <Grid container spacing={3}>
       <Grid item xs={12} sm={6} md={3}>
-        <Datacard iconCircle={'#BDD7F1'} color={'#061B64'} context={'New Projects'} bgcolor={'#D1E9FC'} figure={'500'} icon={<AiIcons.AiOutlineFundProjectionScreen/>}></Datacard>
+        <Datacard iconCircle={'#BDD7F1'} color={'#061B64'} context={'Total Projects'} bgcolor={'#D1E9FC'} figure={'500'} icon={<AiIcons.AiOutlineFundProjectionScreen/>}></Datacard>
         </Grid>
 
         <Grid item xs={12} sm={6} md={3}>
