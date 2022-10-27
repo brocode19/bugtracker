@@ -5,6 +5,9 @@ import { Card } from '@mui/material';
 import { Button, Form, Modal, Table,} from 'react-bootstrap';
 import { MultiSelect } from 'react-multi-select-component';
 import Project from './Project';
+import { collection, addDoc,getDocs } from "firebase/firestore"; 
+import { db } from './firebase';
+
 // import * as MdIcons from "react-icons/md";
 // import * as AiIcons from 'react-icons/ai';
 
@@ -30,7 +33,7 @@ function Projectstable(props) {
       status: "",
       type:'',
       details: "",
-      team:'',
+      team:[],
     });
 
     const [projects, setProjects] = useState([]);
@@ -49,10 +52,30 @@ function Projectstable(props) {
     }
   
 
-  function submitProject(event) {
+  async function submitProject(event) {
 
     setEdit(false);
-    setProjects((prevProjects) => [...prevProjects,projectInput]);  
+
+
+
+    // Add a new document with a generated id.
+const docRef = await addDoc(collection(db, "projects"), projectInput);
+const list = []
+
+console.log("Document written with ID: ", docRef.id);
+
+const querySnapshot = await getDocs(collection(db, "projects"));
+querySnapshot.forEach((doc) => {
+  list.push({id: doc.id,...doc.data()})
+  setProjects(list)
+
+});
+
+
+
+    
+    
+
     setProjectInput({
     name: "",
     priority: "",
