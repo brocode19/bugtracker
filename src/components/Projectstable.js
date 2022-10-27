@@ -1,12 +1,13 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { DataGrid } from '@mui/x-data-grid';
 import { Card } from '@mui/material';
 import { Button, Form, Modal, Table,} from 'react-bootstrap';
 import { MultiSelect } from 'react-multi-select-component';
 import Project from './Project';
-import { collection, addDoc,getDocs } from "firebase/firestore"; 
+import { collection, addDoc,getDocs,doc, deleteDoc } from "firebase/firestore"; 
 import { db } from './firebase';
+
 
 // import * as MdIcons from "react-icons/md";
 // import * as AiIcons from 'react-icons/ai';
@@ -14,6 +15,29 @@ import { db } from './firebase';
 
 
 function Projectstable(props) {
+
+  useEffect(() => {
+
+    const fetchData = async () =>{
+
+      let list = [];
+      try {        
+        const querySnapshot = await getDocs(collection(db, "projects"));
+        querySnapshot.forEach((doc) => {
+          list.push({id: doc.id,...doc.data()})
+          setProjects(list)
+        
+        });
+      
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+
+
+    fetchData()
+  }, [])
 
   const options = [
     { label: "Grapes 🍇", value: "grapes" },
@@ -89,22 +113,20 @@ querySnapshot.forEach((doc) => {
     
   }
 
-  function editProject(id){
+  async function editProject(id){
   
     setEdit(true);
 
 
     setProjects(prevProject => {
       return prevProject.filter((noteItem, index) => {
-        return index !== id;
+        return noteItem.id !== id;
       });
     });
 
     const item = projects.find((noteItem, index) => {
-      return index === id;
+      return noteItem.id === id;
     })
-
-    console.log(item.team, 'hey');
 
 
     setProjectInput({
@@ -117,12 +139,19 @@ querySnapshot.forEach((doc) => {
       
     })
     setSelected(item.team);
+    await deleteDoc(doc(db, "projects", id));
+
   }
 
-  function deleteNote(id){
+ async function deleteNote(id){
+
+  console.log(id);
+
+  await deleteDoc(doc(db, "projects", id));
+
     setProjects(prevProject => {
       return prevProject.filter((projectItem, index) => {
-        return index !== id;
+        return projectItem.id !== id;
       });
     });
   }
@@ -269,7 +298,7 @@ querySnapshot.forEach((doc) => {
         return (
           <Project
             key={index}
-            id={index}
+            id={projectItem.id}
             name={projectItem.name}
             priority={projectItem.priority}
             status={projectItem.status}

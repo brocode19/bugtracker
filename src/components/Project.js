@@ -7,6 +7,7 @@ import * as AiIcons from 'react-icons/ai';
 function Project(props) {
 
   function handleClick() {
+    
     props.onDelete(props.id);
   }
   function handleShow() {
