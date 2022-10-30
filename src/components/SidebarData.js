@@ -28,6 +28,14 @@ export const SidebarData = [
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text'
   },
+  {
+    title: 'Users',
+    path: '/Users',
+    icon: <FaIcons.FaEnvelopeOpenText />,
+    cName: 'nav-text'
+  },
+
+
 
 
 ];
