@@ -77,7 +77,9 @@ function Admin() {
         lname: newUser.lname,
         email: newUser.email,
         password: newUser.password,
-        timeStap:serverTimestamp()
+        label:newUser.fname,
+        value:newUser.fname,
+        timeStap:serverTimestamp(),
 
       });
 

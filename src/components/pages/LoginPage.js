@@ -41,6 +41,9 @@ function LoginPage(props) {
   })
   .catch((error) => {
 
+    console.log(error);
+    setError(true)
+
   });
 
 

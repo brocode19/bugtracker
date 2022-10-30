@@ -13,6 +13,7 @@ function App() {
 
   const [currentUser,setCurrentUser] = useState([]);
   const [user,setUser] = useState(false)
+  
 
   const RequireAuth = ({children}) =>{
     return user ? children : <Navigate to='/LoginPage'/>

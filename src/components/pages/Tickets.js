@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { Button } from 'react-bootstrap';
 import * as MdIcons from "react-icons/md";
 import * as AiIcons from 'react-icons/ai';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebase';
+import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import { db ,} from '../firebase';
+
 
 
 function Tickets() {
@@ -70,9 +71,16 @@ function Tickets() {
 
 
   
-  const handleClick = (id) =>{
+  const handleClick = async (id) =>{
 
     console.log(id);
+    await deleteDoc(doc(db, "users", id));
+    setTeamMember(prev => {
+      return prev.filter((user, index) => {
+        return user.id !== id;
+      });
+    });
+
 
   }
 

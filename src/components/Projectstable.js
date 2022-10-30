@@ -48,8 +48,14 @@ function Projectstable(props) {
   const [selected, setSelected] = useState([]);
   const [edit, setEdit] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true); 
+  const handleClose = () => {
+    
+    setShow(false);
+  }
+  const handleShow = () => {
+    setProjectInput({...projectInput,status:'new'})
+    setShow(true); 
+  }
 
     const [projectInput, setProjectInput] = useState({
       name: "",
@@ -202,7 +208,7 @@ querySnapshot.forEach((doc) => {
           options={options}
           value={selected}
           onChange={setSelected}
-          labelledBy="Select"
+          labelledBy="Team Members"
         />
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Project</Form.Label>
@@ -219,7 +225,7 @@ querySnapshot.forEach((doc) => {
               <Form.Label>Priority</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="high/medium/low"
+                placeholder="urgent/high/medium/low"
                 onChange={handleChange}
                 value={projectInput.priority}
                 name="priority"
@@ -241,7 +247,7 @@ querySnapshot.forEach((doc) => {
               <Form.Label>type</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Complete/In progress/new"
+                placeholder="Issue/Bug/Feature request"
                 onChange={handleChange}
                 value={projectInput.type}
                 name="type"
