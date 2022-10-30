@@ -31,7 +31,7 @@ export const SidebarData = [
   {
     title: 'Users',
     path: '/Users',
-    icon: <FaIcons.FaEnvelopeOpenText />,
+    icon: <FaIcons.FaUserFriends />,
     cName: 'nav-text'
   },
 
