@@ -281,12 +281,12 @@ querySnapshot.forEach((doc) => {
 <Card
     sx={{
       py: 1,
-      color: 'grey',
+      backgroundColor: 'green',
       }}>
-        <div style={{ height: 400, width: '100%' }}>
-        <Button variant="primary"size="sm"onClick={handleShow}> Add Project</Button>
+        <div style={{ height: 400 }}>
+        <Button className='m-1' variant="primary"size="sm"onClick={handleShow}> Add Project</Button>
 
-        <Table striped class="projects-table">         
+        <Table striped className="">         
   <thead>
     <tr>
       <th>Project</th>
