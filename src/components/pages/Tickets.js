@@ -66,6 +66,8 @@ querySnapshot.forEach((doc) => {
   }
 
   const handleEdit = async (id) =>{
+
+    setShow(true);
     setTickets(prev => {
         return prev.filter((noteItem, index) => {
           return noteItem.id !== id;
@@ -176,7 +178,7 @@ querySnapshot.forEach((doc) => {
         </Grid>
 
         <Grid item xs={12} sm={12} md={12}>
-        <Button className='m-1' variant="primary"size="sm"onClick={handleShow}> Add Project</Button>   
+        <Button className='m-1' variant="primary"size="sm"onClick={handleShow}> Add Ticket</Button>   
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
@@ -184,10 +186,10 @@ querySnapshot.forEach((doc) => {
         <Modal.Body>
           <Form>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Project</Form.Label>
+              <Form.Label>Ticket Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder='Project Name'
+                placeholder='Ticket Name'
                 onChange={handleChange}
                 value={ticketInput.name}
                 name="name"
