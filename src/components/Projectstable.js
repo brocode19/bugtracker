@@ -57,6 +57,10 @@ function Projectstable(props) {
     setShow(true); 
   }
 
+  const date = new Date()
+
+  const month = date.getMonth()
+
     const [projectInput, setProjectInput] = useState({
       name: "",
       priority: "",
@@ -64,6 +68,7 @@ function Projectstable(props) {
       type:'',
       details: "",
       team:[],
+      month: month,
     });
 
     const [projects, setProjects] = useState([]);
@@ -101,17 +106,14 @@ querySnapshot.forEach((doc) => {
 
 });
 
-
-
-    
-    
-
     setProjectInput({
     name: "",
     priority: "",
     status: "",
     type:'',
     details: "",
+    month: month,
+    
  
     })
     setSelected([]); 
