@@ -37,6 +37,8 @@ function Projectstable(props) {
 
   const [projects, setProjects] = useState([]);
 
+
+
   const options = [
     { label: "Grapes 🍇", value: "grapes" },
     { label: "Mango 🥭", value: "mango" },
@@ -93,6 +95,7 @@ function Projectstable(props) {
     querySnapshot.forEach((doc) => {
       list.push({ id: doc.id, ...doc.data() });
       setProjects(list);
+      props.setProjects(list)
     });
 
     setProjectInput({
@@ -107,10 +110,15 @@ function Projectstable(props) {
     event.preventDefault();
   }
 
-  const handleClick = async (id) => {
+  const handleDelete = async (id) => {
     console.log(id);
     await deleteDoc(doc(db, "projects", id));
     setProjects((prev) => {
+      return prev.filter((user, index) => {
+        return user.id !== id;
+      });
+    });
+    props.setProjects((prev) => {
       return prev.filter((user, index) => {
         return user.id !== id;
       });
@@ -140,18 +148,6 @@ function Projectstable(props) {
     await deleteDoc(doc(db, "projects", id));
   };
 
-  //  async function deleteNote(id){
-
-  //   console.log(id);
-
-  //   await deleteDoc(doc(db, "projects", id));
-
-  //     setProjects(prevProject => {
-  //       return prevProject.filter((projectItem, index) => {
-  //         return projectItem.id !== id;
-  //       });
-  //     });
-  //   }
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -197,7 +193,7 @@ function Projectstable(props) {
           <>
             <Button
               variant="secondary"
-              onClick={() => handleClick(params.row.id)}
+              onClick={() => handleDelete(params.row.id)}
               size="sm"
             >
               <MdIcons.MdDelete />
@@ -306,7 +302,7 @@ function Projectstable(props) {
         Add Project
       </Button>
 
-      <Box sx={{ py: 2, height: 400, backgroundColor: "white" }}>
+      <Box sx={{ py: 2, height: 500, backgroundColor: "white" }}>
         <DataGrid
           rows={projects}
           columns={columns.concat(actionColumn)}

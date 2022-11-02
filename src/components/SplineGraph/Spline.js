@@ -7,7 +7,7 @@ import ReactApexChart from 'react-apexcharts';
 function Spline(props) {
     const spline = {
       series: [{
-        name: "Desktops",
+        name: "Projects",
         data: [
           props.January,
           props.February,
@@ -26,7 +26,7 @@ function Spline(props) {
     options: {
       chart: {
         height: 350,
-        type: 'line',
+        type: 'area',
         zoom: {
           enabled: false
         }
@@ -35,10 +35,10 @@ function Spline(props) {
         enabled: false
       },
       stroke: {
-        curve: 'straight'
+        curve: 'smooth'
       },
       title: {
-        text: 'Product Trends by Month',
+        text: 'Projects',
         align: 'left'
       },
       grid: {
@@ -59,7 +59,7 @@ function Spline(props) {
       py: 5,
       color: 'grey',
       bgcolor: 'white'}}>
-                  <ReactApexChart options={spline.options} series={spline.series} type="line" height={350} /> 
+                  <ReactApexChart options={spline.options} series={spline.series} type="area" height={350} /> 
       </Card>
 
 

@@ -55,7 +55,7 @@ function Dashboard() {
 
 
 
-  const highPriority = projects.filter(project => project.priority === 'high').length
+
   const totalProjects = projects.length
   const totalBugs =  projects.filter(project => project.type === 'bug').length
   const totalFeatures =  projects.filter(project => project.type === 'feature').length
@@ -217,9 +217,12 @@ function Dashboard() {
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
          <PieChart
-         admin={admin}
-         developer={developer}
-         manager={projectManager}
+         value1={admin}
+         value2={developer}
+         value3={projectManager}
+         item1={'Admins'}
+         item2={'Developer'}
+         item3={'Project Manager'}
          />
 
       </Grid>

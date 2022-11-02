@@ -5,13 +5,13 @@ import ReactApexChart from 'react-apexcharts';
 function PieChart(props) {
   const polar = {
           
-    series: [props.admin, props.developer, props.manager],
+    series: [props.value1, props.value2, props.value3],
     options: {
       chart: {
         width: 380,
         type: 'polarArea'
       },
-      labels: ['Admins', 'Developers', 'Project Managers'],
+      labels: [props.item1,props.item2,props.item3],
       fill: {
         opacity: 1
       },
