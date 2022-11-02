@@ -116,8 +116,6 @@ function Dashboard() {
   const NovemberFeature = projects.filter(project => project.month === 10 &&  project.type === 'feature' ).length
   const NovemberIssue = projects.filter(project => project.month === 10 &&  project.type === 'issue' ).length
 
-  console.log(NovemberBugs);
-
   const December = projects.filter(project => project.month === 11).length
   const DecemberBugs = projects.filter(project => project.month === 11 &&  project.type === 'bug' ).length
   const DecemberFeature = projects.filter(project => project.month === 11 &&  project.type === 'feature' ).length
