@@ -52,6 +52,7 @@ function Admin() {
     lname: "",
     email: "",
     password:"",
+    role:"",
   });
 
   function handleChange(event) {
@@ -80,6 +81,7 @@ function Admin() {
         label:newUser.fname,
         value:newUser.fname,
         timeStap:serverTimestamp(),
+        role:newUser.role,
 
       });
 
@@ -88,21 +90,20 @@ function Admin() {
         lname: "",
         email: "",
         password:"",
+        role:"",
       })
 
 
   }
   return (
     <div className='pages mt-5'>
-      <Box sx={{ height: "100%", width: '100%',backgroundColor:'white' }}>
-      <MDBContainer fluid>
+      <Box sx={{ height: "100", width: '100%',backgroundColor:'white' }}>
 
-<div className="p-5 bg-image" style={{backgroundImage: 'url(https://mdbootstrap.com/img/new/textures/full/171.jpg)', height: '300px'}}></div>
 
-<MDBCard className='mx-5 mb-5 p-5 shadow-5' style={{marginTop: '-100px', background: 'hsla(0, 0%, 100%, 0.8)', backdropFilter: 'blur(30px)'}}>
+<MDBCard className='mx-5 mb-5 p-2 shadow-5' style={{ background: 'hsla(0, 0%, 100%, 0.8)', backdropFilter: 'blur(30px)'}}>
   <MDBCardBody className='p-5 text-center'>
 
-    <h2 className="fw-bold mb-5">Sign up now</h2>
+    <h2 className="fw-bold mb-5">Add User</h2>
 
     <MDBRow>
       <MDBCol col='6'>
@@ -116,6 +117,7 @@ function Admin() {
 
     <MDBInput wrapperClass='mb-4' value={newUser.email} name='email' onChange={handleChange} label='Email' id='form51' type='email'/>
     <MDBInput wrapperClass='mb-4' value={newUser.password} name='password' onChange={handleChange} label='Password' id='form2' type='password'/>
+    <MDBInput wrapperClass='mb-4' value={newUser.role} name='role' onChange={handleChange} label='Role' id='form2' type='text'/>
 
 
 
@@ -145,8 +147,6 @@ function Admin() {
 
   </MDBCardBody>
 </MDBCard>
-
-       </MDBContainer>
       </Box>
 
     </div>

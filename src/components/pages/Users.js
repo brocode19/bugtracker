@@ -50,13 +50,10 @@ function Users() {
       editable: true,
     },
     {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
+      field: 'role',
+      headerName: 'Role',
       width: 200,
-      valueGetter: (params) =>
-        `${params.row.fname || ''} ${params.row.lname || ''}`,
+      editable: true,
     },
     {
       field: 'email',

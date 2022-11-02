@@ -20,6 +20,7 @@ function Dashboard() {
     const fetchData = async () =>{
 
       let list = [];
+      let user = [];
       try {        
         const querySnapshot = await getDocs(collection(db, "projects"));
         querySnapshot.forEach((doc) => {
@@ -32,12 +33,27 @@ function Dashboard() {
         console.log(error);
         
       }
+
+      const Snapshot = await getDocs(collection(db, "users"));
+      Snapshot.forEach((doc) => {
+        user.push({id: doc.id,...doc.data()})
+        setTeamMember(user)
+      
+      });
     }
 
 
     fetchData()
   }, [])
   const [projects, setProjects] = useState([]);
+  const [teamMember, setTeamMember] = useState([]);
+
+  const admin = teamMember.filter(item => item.role === 'admin').length
+  const developer = teamMember.filter(item => item.role === 'developer').length
+  const projectManager = teamMember.filter(item => item.role === 'manager').length
+
+
+
 
   const highPriority = projects.filter(project => project.priority === 'high').length
   const totalProjects = projects.length
@@ -202,7 +218,11 @@ function Dashboard() {
         />
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
-         <PieChart/>
+         <PieChart
+         admin={admin}
+         developer={developer}
+         manager={projectManager}
+         />
 
       </Grid>
       </Grid>

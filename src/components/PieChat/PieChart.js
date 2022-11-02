@@ -2,10 +2,10 @@ import { Card } from '@mui/material';
 import React from 'react'
 import ReactApexChart from 'react-apexcharts';
 
-function PieChart() {
+function PieChart(props) {
   const polar = {
           
-    series: [42, 47, 52],
+    series: [props.admin, props.developer, props.manager],
     options: {
       chart: {
         width: 380,
