@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box,} from "@mui/material";
-import { Button, Form, Modal,} from "react-bootstrap";
+import { Box } from "@mui/material";
+import { Button, Form, Modal } from "react-bootstrap";
 import { MultiSelect } from "react-multi-select-component";
 import {
   collection,
@@ -13,6 +13,8 @@ import { db } from "./firebase";
 import * as AiIcons from "react-icons/ai";
 import * as MdIcons from "react-icons/md";
 import { DataGrid } from "@mui/x-data-grid";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 // import * as MdIcons from "react-icons/md";
 // import * as AiIcons from 'react-icons/ai';
@@ -37,8 +39,6 @@ function Projectstable(props) {
 
   const [projects, setProjects] = useState([]);
 
-
-
   const options = [
     { label: "Grapes 🍇", value: "grapes" },
     { label: "Mango 🥭", value: "mango" },
@@ -47,6 +47,10 @@ function Projectstable(props) {
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState([]);
   const [edit, setEdit] = useState(false);
+
+  const [value, setValue] = useState(options[0]);
+  const [inputValue, setInputValue] = useState("");
+
 
   const handleClose = () => {
     setShow(false);
@@ -72,8 +76,6 @@ function Projectstable(props) {
     year: currentYear,
   });
 
-
-
   function handleChange(event) {
     const { name, value } = event.target;
 
@@ -97,7 +99,7 @@ function Projectstable(props) {
     querySnapshot.forEach((doc) => {
       list.push({ id: doc.id, ...doc.data() });
       setProjects(list);
-      props.setProjects(list)
+      props.setProjects(list);
     });
 
     setProjectInput({
@@ -150,7 +152,6 @@ function Projectstable(props) {
     });
     await deleteDoc(doc(db, "projects", id));
   };
-
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },

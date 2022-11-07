@@ -16,16 +16,28 @@ import {
 import { db } from "../firebase";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 function Tickets() {
   useEffect(() => {
     const fetchData = async () => {
       let list = [];
+      let projects = []
       try {
         const querySnapshot = await getDocs(collection(db, "tickets"));
         querySnapshot.forEach((doc) => {
           list.push({ id: doc.id, ...doc.data() });
           setTickets(list);
+        });
+        const querySnapsho = await getDocs(collection(db, "projects"));
+        querySnapsho.forEach((doc) => {
+          projects.push(doc.data().name);
+          if (projects.length !== 0) {
+            setProjectNames(projects)
+            
+          }
+          
         });
       } catch (error) {
         console.log(error);
@@ -35,9 +47,21 @@ function Tickets() {
     fetchData();
   }, []);
 
+  const [projectNames,setProjectNames] = useState(['Just A ticket'])
+  const [value, setValue] = useState(projectNames[0]);
+  const [inputValue, setInputValue] = useState("");
+
+  const status = ['new', 'complete','progress'];
+  const type = ['issue', 'feature','bug'];
+  const priority = ['high', 'medium','low'];
+
+
+
   const [tickets, setTickets] = useState([]);
   const totalTickets = tickets.length;
-  const highStatus = tickets.filter((project) => project.status === "high").length;
+  const highStatus = tickets.filter(
+    (project) => project.status === "high"
+  ).length;
   const mediumStatus = tickets.filter(
     (project) => project.status === "medium"
   ).length;
@@ -46,8 +70,9 @@ function Tickets() {
   ).length;
   const [ticketInput, setTicketInput] = useState({
     name: "",
+    projectsName:value,
     priority: "",
-    status: "",
+    status: "new",
     type: "",
     details: "",
     team: [],
@@ -66,11 +91,34 @@ function Tickets() {
 
     const list = [];
 
-    const querySnapshot = await getDocs(collection(db, "tickets"));
-    querySnapshot.forEach((doc) => {
-      list.push({ id: doc.id, ...doc.data() });
-      setTickets(list);
-    });
+    try {
+      const querySnapshot = await getDocs(collection(db, "tickets"));
+      querySnapshot.forEach((doc) => {
+        list.push({ id: doc.id, ...doc.data() });
+        setTickets(list);
+      });
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+
+ setTicketInput(
+  {
+    name: "",
+    projectsName:value,
+    priority: "",
+    status: "new",
+    type: "",
+    details: "",
+    team: [],
+  }
+ )
+
+
+
+
+
   };
 
   const [show, setShow] = useState(false);
@@ -102,11 +150,13 @@ function Tickets() {
 
     setTicketInput({
       name: item.name,
+      projectsName:item.projectsName,
       priority: item.priority,
       status: item.status,
       type: item.type,
       details: item.details,
       team: item.team,
+      
     });
     await deleteDoc(doc(db, "tickets", id));
   };
@@ -246,6 +296,21 @@ function Tickets() {
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
+                    <Autocomplete
+                      value={value}
+                      onChange={(event, newValue) => {
+                        setValue(newValue);
+                      }}
+                      inputValue={inputValue}
+                      onInputChange={(event, newInputValue) => {
+                        setInputValue(newInputValue);
+                      }}
+                      id="controllable-states-demo"
+                      options={projectNames}
+                      renderInput={(params) => (
+                        <TextField {...params} label="Project Name" />
+                      )}
+                    />
                     <Form.Label>Ticket Name</Form.Label>
                     <Form.Control
                       type="text"
