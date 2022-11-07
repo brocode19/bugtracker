@@ -59,6 +59,7 @@ function Projectstable(props) {
   const date = new Date();
 
   const month = date.getMonth();
+  const currentYear = date.getFullYear();
 
   const [projectInput, setProjectInput] = useState({
     name: "",
@@ -68,6 +69,7 @@ function Projectstable(props) {
     details: "",
     team: [],
     month: month,
+    year: currentYear,
   });
 
 
@@ -105,6 +107,7 @@ function Projectstable(props) {
       type: "",
       details: "",
       month: month,
+      year: currentYear,
     });
     setSelected([]);
     event.preventDefault();

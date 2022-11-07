@@ -3,20 +3,10 @@ import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 function BarChat(props) {
-  const years = [
-    "01/04/2022",
-    "02/04/2022",
-    "03/04/2022",
-    "04/04/2022",
-    "05/04/2022",
-    "06/04/2022",
-    "07/04/2022",
-    "08/04/2022",
-    "09/04/2022",
-    "10/04/2022",
-    "11/04/2022",
-    "12/04/2022",
-  ];
+
+  const date = new Date()
+  const currentYear = date.getFullYear()
+  
   const bar = {
     series: [
       {
@@ -120,18 +110,18 @@ function BarChat(props) {
         },
       },
       labels: [
-        "01/04/2022",
-        "02/04/2022",
-        "03/04/2022",
-        "04/04/2022",
-        "05/04/2022",
-        "06/04/2022",
-        "07/04/2022",
-        "08/04/2022",
-        "09/04/2022",
-        "10/04/2022",
-        "11/04/2022",
-        "12/04/2022",
+        `01/04/${currentYear}`,
+        `02/04/${currentYear}`,
+        `03/04/${currentYear}`,
+        `04/04/${currentYear}`,
+        `05/04/${currentYear}`,
+        `06/04/${currentYear}`,
+        `07/04/${currentYear}`,
+        `08/04/${currentYear}`,
+        `09/04/${currentYear}`,
+        `10/04/${currentYear}`,
+        `11/04/${currentYear}`,
+        `12/04/${currentYear}`,
       ],
       markers: {
         size: 0,

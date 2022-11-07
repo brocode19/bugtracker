@@ -36,14 +36,6 @@ function App() {
 </BrowserRouter>
 </div>
 
-
-
-
-
-
-
-
-    
   )
 }
 
