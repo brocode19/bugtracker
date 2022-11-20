@@ -36,6 +36,8 @@ function Tickets() {
           if (projects.length !== 0) {
             setProjectNames(projects)
             
+          }else{
+            setProjectNames(['Ticket'])
           }
           
         });
@@ -47,13 +49,22 @@ function Tickets() {
     fetchData();
   }, []);
 
-  const [projectNames,setProjectNames] = useState(['Just A ticket'])
+  const [projectNames,setProjectNames] = useState([])
   const [value, setValue] = useState(projectNames[0]);
   const [inputValue, setInputValue] = useState("");
 
-  const status = ['new', 'complete','progress'];
-  const type = ['issue', 'feature','bug'];
-  const priority = ['high', 'medium','low'];
+
+  const statusOptions = ['new', 'complete','progress'];
+  const [statusValue, setStatusValue] = React.useState(statusOptions[0]);
+  const [statusInputValue, setStatusInputValue] = React.useState('');
+
+  const typeOptions = ['issue', 'feature','bug'];
+  const [typeValue, setTypeValue] = React.useState(typeOptions[0]);
+  const [typeInputValue, setTypeInputValue] = React.useState('');
+
+  const priorityOptions = ['high', 'medium','low'];
+  const [priorityValue, setPriorityValue] = React.useState(priorityOptions[0]);
+  const [priorityInputValue, setPriorityInputValue] = React.useState('');
 
 
 
@@ -71,12 +82,14 @@ function Tickets() {
   const [ticketInput, setTicketInput] = useState({
     name: "",
     projectsName:value,
-    priority: "",
-    status: "new",
-    type: "",
+    priority: priorityValue,
+    status: statusValue,
+    type: typeValue,
     details: "",
     team: [],
   });
+
+  console.log(typeof statusValue,typeValue,priorityValue,value);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -103,21 +116,20 @@ function Tickets() {
       
     }
 
+
+
+
  setTicketInput(
   {
     name: "",
     projectsName:value,
-    priority: "",
-    status: "new",
-    type: "",
+    priority: priorityValue,
+    status: statusValue,
+    type: typeValue,
     details: "",
     team: [],
   }
  )
-
-
-
-
 
   };
 
@@ -150,14 +162,15 @@ function Tickets() {
 
     setTicketInput({
       name: item.name,
-      projectsName:item.projectsName,
-      priority: item.priority,
-      status: item.status,
-      type: item.type,
       details: item.details,
       team: item.team,
       
     });
+
+    setValue([item.projectsName])
+    setTypeValue([item.type])
+    setStatusValue([item.status])
+    setPriorityValue([item.priority])
     await deleteDoc(doc(db, "tickets", id));
   };
 
@@ -292,25 +305,10 @@ function Tickets() {
               </Modal.Header>
               <Modal.Body>
                 <Form>
-                  <Form.Group
+                <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
-                    <Autocomplete
-                      value={value}
-                      onChange={(event, newValue) => {
-                        setValue(newValue);
-                      }}
-                      inputValue={inputValue}
-                      onInputChange={(event, newInputValue) => {
-                        setInputValue(newInputValue);
-                      }}
-                      id="controllable-states-demo"
-                      options={projectNames}
-                      renderInput={(params) => (
-                        <TextField {...params} label="Project Name" />
-                      )}
-                    />
                     <Form.Label>Ticket Name</Form.Label>
                     <Form.Control
                       type="text"
@@ -321,48 +319,69 @@ function Tickets() {
                       autoFocus
                     />
                   </Form.Group>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label>Priority</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="urgent/high/medium/low"
-                      onChange={handleChange}
-                      value={ticketInput.priority}
-                      name="priority"
-                      autoFocus
+                <Autocomplete
+                      value={value}
+                      onChange={(event, newValue) => {
+                        setValue(newValue);
+                      }}
+                      inputValue={inputValue}
+                      onInputChange={(event, newInputValue) => {
+                        setInputValue(newInputValue);
+                      }}
+                      id="project name"
+                      options={projectNames}
+                      renderInput={(params) => (
+                        <TextField {...params} label="Project Name" />
+                      )}
                     />
-                  </Form.Group>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label>Status</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Complete/In progress/new"
-                      onChange={handleChange}
-                      value={ticketInput.status}
-                      name="status"
-                      autoFocus
+                    <Autocomplete
+                      value={statusValue}
+                      onChange={(event, newValue) => {
+                        setStatusValue(newValue);
+                      }}
+                      inputValue={statusInputValue}
+                      onInputChange={(event, newInputValue) => {
+                        setStatusInputValue(newInputValue);
+                      }}
+                      id="status"
+                      className="mt-3"
+                      options={statusOptions}
+                      renderInput={(params) => (
+                        <TextField {...params} label="Status" />
+                      )}
                     />
-                  </Form.Group>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label>type</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Issue/Bug/Feature request"
-                      onChange={handleChange}
-                      value={ticketInput.type}
-                      name="type"
-                      autoFocus
+                    <Autocomplete
+                      value={typeValue}
+                      onChange={(event, newValue) => {
+                        setTypeValue(newValue);
+                      }}
+                      inputValue={typeInputValue}
+                      onInputChange={(event, newInputValue) => {
+                        setTypeInputValue(newInputValue);
+                      }}
+                      id="status"
+                      className="mt-3"
+                      options={typeOptions}
+                      renderInput={(params) => (
+                        <TextField {...params} label="Type" />
+                      )}
                     />
-                  </Form.Group>
+                    <Autocomplete
+                      value={priorityValue}
+                      onChange={(event, newValue) => {
+                        setPriorityValue(newValue);
+                      }}
+                      inputValue={priorityInputValue}
+                      onInputChange={(event, newInputValue) => {
+                        setPriorityInputValue(newInputValue);
+                      }}
+                      id="status"
+                      className="mt-3"
+                      options={priorityOptions}
+                      renderInput={(params) => (
+                        <TextField {...params} label="Priority" />
+                      )}
+                    />
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlTextarea1"

@@ -15,6 +15,10 @@ import * as MdIcons from "react-icons/md";
 import { DataGrid } from "@mui/x-data-grid";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 // import * as MdIcons from "react-icons/md";
 // import * as AiIcons from 'react-icons/ai';
@@ -38,6 +42,31 @@ function Projectstable(props) {
   }, []);
 
   const [projects, setProjects] = useState([]);
+  const [type, setInputType] = React.useState("");
+  const [status, setInputStatus] = React.useState("");
+  const [priority, setInputPriority] = React.useState("");
+
+  const handleInputChange = (event) => {
+
+    const { name, value } = event.target;
+    
+    if (name === 'type') {
+      setInputType(value);
+    } 
+    if (name === 'status') {
+      setInputStatus(value);
+    } 
+    if (name === 'priority') {
+      setInputPriority(value);
+    } 
+
+    setProjectInput({
+      ...projectInput,
+      [name]:value,
+    });
+  };
+
+  console.log(type,'sljdlfkj');
 
   const options = [
     { label: "Grapes 🍇", value: "grapes" },
@@ -51,14 +80,10 @@ function Projectstable(props) {
   const [value, setValue] = useState(options[0]);
   const [inputValue, setInputValue] = useState("");
 
-
   const handleClose = () => {
     setShow(false);
   };
-  const handleShow = () => {
-    setProjectInput({ ...projectInput, status: "new" });
-    setShow(true);
-  };
+
 
   const date = new Date();
 
@@ -67,14 +92,20 @@ function Projectstable(props) {
 
   const [projectInput, setProjectInput] = useState({
     name: "",
-    priority: "",
-    status: "",
-    type: "",
+    priority: priority,
+    status: status,
+    type: type,
     details: "",
     team: [],
     month: month,
     year: currentYear,
   });
+
+  const handleShow = () => {
+
+    projectInput.status === "" && setProjectInput({ ...projectInput, status: "new" });
+    setShow(true);
+  };
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -104,9 +135,9 @@ function Projectstable(props) {
 
     setProjectInput({
       name: "",
-      priority: "",
-      status: "",
-      type: "",
+      priority: priority,
+      status: status,
+      type: type,
       details: "",
       month: month,
       year: currentYear,
@@ -244,39 +275,57 @@ function Projectstable(props) {
                 autoFocus
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Priority</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="urgent/high/medium/low"
-                onChange={handleChange}
-                value={projectInput.priority}
-                name="priority"
-                autoFocus
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Status</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Complete/In progress/new"
-                onChange={handleChange}
-                value={projectInput.status}
-                name="status"
-                autoFocus
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>type</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Issue/Bug/Feature request"
-                onChange={handleChange}
-                value={projectInput.type}
-                name="type"
-                autoFocus
-              />
-            </Form.Group>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo">Type</InputLabel>
+                <Select
+                  labelId="demo"
+                  id="demo-simple-select"
+                  value={type}
+                  label="Type"
+                  name="type"
+                  onChange={handleInputChange}
+                >
+                  <MenuItem value={"issue"}>Issue</MenuItem>
+                  <MenuItem value={"bug"}>Bug</MenuItem>
+                  <MenuItem value={"feature"}>Feature Request</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <Box sx={{ minWidth: 120 , mt:2 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple">Status</InputLabel>
+                <Select
+                  labelId="demo"
+                  id="status"
+                  value={status}
+                  label="Status"
+                  name="status"
+                  onChange={handleInputChange}
+                >
+                  <MenuItem value={"new"}>New</MenuItem>
+                  <MenuItem value={"complete"}>Complete</MenuItem>
+                  <MenuItem value={"progress"}>In Progress</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <Box sx={{ minWidth: 120 , mt:2 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple">Priority</InputLabel>
+                <Select
+                  labelId="demo"
+                  id="priority"
+                  value={priority}
+                  label="Priority"
+                  name="priority"
+                  onChange={handleInputChange}
+                >
+                  <MenuItem value={"high"}>High</MenuItem>
+                  <MenuItem value={"medium"}>Medium</MenuItem>
+                  <MenuItem value={"low"}>Low</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
