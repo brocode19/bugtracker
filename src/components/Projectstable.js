@@ -19,6 +19,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Checkbox from "@mui/material/Checkbox";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 // import * as MdIcons from "react-icons/md";
 // import * as AiIcons from 'react-icons/ai';
@@ -27,6 +30,7 @@ function Projectstable(props) {
   useEffect(() => {
     const fetchData = async () => {
       let list = [];
+      let projectUsers = [];
       try {
         const querySnapshot = await getDocs(collection(db, "projects"));
         querySnapshot.forEach((doc) => {
@@ -36,6 +40,12 @@ function Projectstable(props) {
       } catch (error) {
         console.log(error);
       }
+
+      const team = await getDocs(collection(db, "users"));
+      team.forEach((doc) => {
+        projectUsers.push({ id: doc.id, ...doc.data() });
+        setProjectUsers(projectUsers);
+      });
     };
 
     fetchData();
@@ -45,34 +55,32 @@ function Projectstable(props) {
   const [type, setInputType] = React.useState("");
   const [status, setInputStatus] = React.useState("");
   const [priority, setInputPriority] = React.useState("");
+  const [projectUsers, setProjectUsers] = useState([]);
+  const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+  const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
   const handleInputChange = (event) => {
-
     const { name, value } = event.target;
-    
-    if (name === 'type') {
+
+    if (name === "type") {
       setInputType(value);
-    } 
-    if (name === 'status') {
+    }
+    if (name === "status") {
       setInputStatus(value);
-    } 
-    if (name === 'priority') {
+    }
+    if (name === "priority") {
       setInputPriority(value);
-    } 
+    }
 
     setProjectInput({
       ...projectInput,
-      [name]:value,
+      [name]: value,
     });
   };
 
-  console.log(type,'sljdlfkj');
+  console.log(type, "sljdlfkj");
 
-  const options = [
-    { label: "Grapes 🍇", value: "grapes" },
-    { label: "Mango 🥭", value: "mango" },
-    { label: "Strawberry 🍓", value: "strawberry" },
-  ];
+  const options = projectUsers;
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState([]);
   const [edit, setEdit] = useState(false);
@@ -83,7 +91,6 @@ function Projectstable(props) {
   const handleClose = () => {
     setShow(false);
   };
-
 
   const date = new Date();
 
@@ -102,8 +109,8 @@ function Projectstable(props) {
   });
 
   const handleShow = () => {
-
-    projectInput.status === "" && setProjectInput({ ...projectInput, status: "new" });
+    projectInput.status === "" &&
+      setProjectInput({ ...projectInput, status: "new" });
     setShow(true);
   };
 
@@ -256,14 +263,6 @@ function Projectstable(props) {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <h2>Select Team</h2>
-            {/* <pre>{JSON.stringify(selected)}</pre> */}
-            <MultiSelect
-              options={options}
-              value={selected}
-              onChange={setSelected}
-              labelledBy="Team Members"
-            />
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Project</Form.Label>
               <Form.Control
@@ -275,6 +274,28 @@ function Projectstable(props) {
                 autoFocus
               />
             </Form.Group>
+            <Autocomplete
+      multiple
+      id="checkboxes-tags-demo"
+      options={options}
+      disableCloseOnSelect
+      getOptionLabel={(option) => option.value}
+      renderOption={(props, option, { selected }) => (
+        <li {...props}>
+          <Checkbox
+            icon={icon}
+            checkedIcon={checkedIcon}
+            style={{ marginRight: 8 }}
+            checked={selected}
+          />
+          {option.value}
+        </li>
+      )}
+      style={{ width: 500 }}
+      renderInput={(params) => (
+        <TextField {...params} label="Select Team" placeholder="members" />
+      )}
+    />
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo">Type</InputLabel>
@@ -292,7 +313,7 @@ function Projectstable(props) {
                 </Select>
               </FormControl>
             </Box>
-            <Box sx={{ minWidth: 120 , mt:2 }}>
+            <Box sx={{ minWidth: 120, mt: 2 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple">Status</InputLabel>
                 <Select
@@ -309,7 +330,7 @@ function Projectstable(props) {
                 </Select>
               </FormControl>
             </Box>
-            <Box sx={{ minWidth: 120 , mt:2 }}>
+            <Box sx={{ minWidth: 120, mt: 2 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple">Priority</InputLabel>
                 <Select
@@ -325,6 +346,14 @@ function Projectstable(props) {
                   <MenuItem value={"low"}>Low</MenuItem>
                 </Select>
               </FormControl>
+            </Box>
+            <Box sx={{ minWidth: 120, mt: 2 }}>
+              <MultiSelect
+                options={options}
+                value={selected}
+                onChange={setSelected}
+                labelledBy="Team Members"
+              />
             </Box>
             <Form.Group
               className="mb-3"
