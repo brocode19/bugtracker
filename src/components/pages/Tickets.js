@@ -18,53 +18,57 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { TextFormatRounded } from "@mui/icons-material";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 function Tickets() {
   useEffect(() => {
     const fetchData = async () => {
       let list = [];
-      let projects = []
+      let projectUsers = [];
+      let projects = [];
       try {
         const querySnapshot = await getDocs(collection(db, "tickets"));
         querySnapshot.forEach((doc) => {
           list.push({ id: doc.id, ...doc.data() });
           setTickets(list);
         });
-        const querySnapsho = await getDocs(collection(db, "projects"));
-        querySnapsho.forEach((doc) => {
-          projects.push(doc.data().name);
-          if (projects.length !== 0) {
-            setProjectNames(projects)
-            
-          }else{
-            setProjectNames(['Ticket'])
-          }
-          
-        });
+        
       } catch (error) {
         console.log(error);
       }
+      const team = await getDocs(collection(db, "users"));
+      team.forEach((doc) => {
+        projectUsers.push({ id: doc.id,fname:doc.data().fname,role:doc.data().role,label:doc.data().label,value:doc.data().value  });
+        setProjectUsers(projectUsers);
+      });
+
+      const querySnapshot = await getDocs(collection(db, "projects"));
+        querySnapshot.forEach((doc) => {
+          projects.push({ id: doc.id, ...doc.data() });
+          setProjects(projects);
+        });
     };
 
     fetchData();
   }, []);
 
-  const [projectNames,setProjectNames] = useState([])
-  const [value, setValue] = useState(projectNames[0]);
-  const [inputValue, setInputValue] = useState("");
+  const [type, setInputType] = React.useState("");
+  const [status, setInputStatus] = React.useState("");
+  const [priority, setInputPriority] = React.useState("");
+  const [projectName, setProjectName ] = React.useState("");
+  const [selected, setSelected] = useState([]);
+  const [team, setTeam] = useState([]);
+  const [projectUsers, setProjectUsers] = useState([]);
+  const options = projectUsers;
+  const [projects, setProjects] = useState([]);
+  const projectItems = projects.map(item => item.name);
+  console.log(projectItems);
 
 
-  const statusOptions = ['new', 'complete','progress'];
-  const [statusValue, setStatusValue] = React.useState(statusOptions[0]);
-  const [statusInputValue, setStatusInputValue] = React.useState('');
-
-  const typeOptions = ['issue', 'feature','bug'];
-  const [typeValue, setTypeValue] = React.useState(typeOptions[0]);
-  const [typeInputValue, setTypeInputValue] = React.useState('');
-
-  const priorityOptions = ['high', 'medium','low'];
-  const [priorityValue, setPriorityValue] = React.useState(priorityOptions[0]);
-  const [priorityInputValue, setPriorityInputValue] = React.useState('');
 
 
 
@@ -79,17 +83,18 @@ function Tickets() {
   const lowStatus = tickets.filter(
     (project) => project.status === "low"
   ).length;
+
+
   const [ticketInput, setTicketInput] = useState({
     name: "",
-    projectsName:value,
-    priority: priorityValue,
-    status: statusValue,
-    type: typeValue,
+    projectName:projectName,
+    priority: priority,
+    status: status,
+    type: type,
     details: "",
-    team: [],
+    team: team,
   });
 
-  console.log(typeof statusValue,typeValue,priorityValue,value);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -116,18 +121,24 @@ function Tickets() {
       
     }
 
+    setSelected([]);
+    setProjectName('');
+    setInputType('');
+    setInputPriority('');
+    setInputStatus('');
+
 
 
 
  setTicketInput(
   {
     name: "",
-    projectsName:value,
-    priority: priorityValue,
-    status: statusValue,
-    type: typeValue,
+    projectName:projectName,
+    priority: priority,
+    status: status,
+    type: type,
     details: "",
-    team: [],
+    team: team,
   }
  )
 
@@ -137,6 +148,35 @@ function Tickets() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    if (name === "type") {
+      setInputType(value);
+    }
+    if (name === "status") {
+      setInputStatus(value);
+    }
+    if (name === "priority") {
+      setInputPriority(value);
+    }
+    if (name === "projectName") {
+      setProjectName(value);
+    }
+
+    setTicketInput({
+      ...ticketInput,
+      [name]: value,
+    });
+  };
+
+  const handleSelectTeam = (item)=>{
+    setSelected(item)
+    setTicketInput({
+      ...ticketInput,team:item
+    })
+  }
 
   const handleClick = async (id) => {
     console.log(id);
@@ -160,17 +200,24 @@ function Tickets() {
       return noteItem.id === id;
     });
 
+    setInputType(item.type);
+    setInputPriority(item.priority);
+    setInputStatus(item.status);
+    setProjectName(item.projectName);
+    setSelected(item.team);
+
     setTicketInput({
       name: item.name,
+      projectName:item.projectsName,
+      priority:item.priority,
+      type:item.type,
+      status:item.status,
       details: item.details,
       team: item.team,
       
     });
 
-    setValue([item.projectsName])
-    setTypeValue([item.type])
-    setStatusValue([item.status])
-    setPriorityValue([item.priority])
+
     await deleteDoc(doc(db, "tickets", id));
   };
 
@@ -301,7 +348,7 @@ function Tickets() {
             </Button>
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Tickets</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Form>
@@ -319,69 +366,83 @@ function Tickets() {
                       autoFocus
                     />
                   </Form.Group>
-                <Autocomplete
-                      value={value}
-                      onChange={(event, newValue) => {
-                        setValue(newValue);
-                      }}
-                      inputValue={inputValue}
-                      onInputChange={(event, newInputValue) => {
-                        setInputValue(newInputValue);
-                      }}
-                      id="project name"
-                      options={projectNames}
-                      renderInput={(params) => (
-                        <TextField {...params} label="Project Name" />
-                      )}
-                    />
-                    <Autocomplete
-                      value={statusValue}
-                      onChange={(event, newValue) => {
-                        setStatusValue(newValue);
-                      }}
-                      inputValue={statusInputValue}
-                      onInputChange={(event, newInputValue) => {
-                        setStatusInputValue(newInputValue);
-                      }}
-                      id="status"
-                      className="mt-3"
-                      options={statusOptions}
-                      renderInput={(params) => (
-                        <TextField {...params} label="Status" />
-                      )}
-                    />
-                    <Autocomplete
-                      value={typeValue}
-                      onChange={(event, newValue) => {
-                        setTypeValue(newValue);
-                      }}
-                      inputValue={typeInputValue}
-                      onInputChange={(event, newInputValue) => {
-                        setTypeInputValue(newInputValue);
-                      }}
-                      id="status"
-                      className="mt-3"
-                      options={typeOptions}
-                      renderInput={(params) => (
-                        <TextField {...params} label="Type" />
-                      )}
-                    />
-                    <Autocomplete
-                      value={priorityValue}
-                      onChange={(event, newValue) => {
-                        setPriorityValue(newValue);
-                      }}
-                      inputValue={priorityInputValue}
-                      onInputChange={(event, newInputValue) => {
-                        setPriorityInputValue(newInputValue);
-                      }}
-                      id="status"
-                      className="mt-3"
-                      options={priorityOptions}
-                      renderInput={(params) => (
-                        <TextField {...params} label="Priority" />
-                      )}
-                    />
+
+                  <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo">Type</InputLabel>
+                <Select
+                  labelId="demo"
+                  id="demo-simple-select"
+                  value={type}
+                  label="Type"
+                  name="type"
+                  onChange={handleInputChange}
+                >
+                  <MenuItem value={"issue"}>Issue</MenuItem>
+                  <MenuItem value={"bug"}>Bug</MenuItem>
+                  <MenuItem value={"feature"}>Feature Request</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <Box sx={{ minWidth: 120, mt: 2 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple">Status</InputLabel>
+                <Select
+                  labelId="demo"
+                  id="status"
+                  value={status}
+                  label="Status"
+                  name="status"
+                  onChange={handleInputChange}
+                >
+                  <MenuItem value={"new"}>New</MenuItem>
+                  <MenuItem value={"complete"}>Complete</MenuItem>
+                  <MenuItem value={"progress"}>In Progress</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <Box sx={{ minWidth: 120, mt: 2 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple">Priority</InputLabel>
+                <Select
+                  labelId="demo"
+                  id="priority"
+                  value={priority}
+                  label="Priority"
+                  name="priority"
+                  onChange={handleInputChange}
+                >
+                  <MenuItem value={"high"}>High</MenuItem>
+                  <MenuItem value={"medium"}>Medium</MenuItem>
+                  <MenuItem value={"low"}>Low</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <Box sx={{ minWidth: 120, mt: 2 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple">Project Name</InputLabel>
+                <Select
+                  labelId="demo"
+                  id="projectName"
+                  value={projectName}
+                  label="projectName"
+                  name="projectName"
+                  onChange={handleInputChange}
+                >
+                  {projectItems.map(item => <MenuItem value={item}>{item}</MenuItem> )}
+                </Select>
+              </FormControl>
+            </Box>
+
+            <Box sx={{ minWidth: 120, mt: 2 }}>
+      <MultiSelect
+        options={options}
+        value={selected}
+        onChange={handleSelectTeam}
+        labelledBy="Select"
+      />
+            </Box>
+
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlTextarea1"
