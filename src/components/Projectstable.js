@@ -17,6 +17,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useNavigate } from "react-router-dom";
 // import * as MdIcons from "react-icons/md";
 // import * as AiIcons from 'react-icons/ai';
 
@@ -59,6 +60,8 @@ function Projectstable(props) {
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
 
+  const navigate = useNavigate()
+
   const options = projectUsers;
   const date = new Date();
   const month = date.getMonth();
@@ -69,7 +72,22 @@ function Projectstable(props) {
       field: "name",
       headerName: "Project Name",
       width: 150,
-      editable: true,
+      disableClickEventBubbling: true,
+      renderCell: (params) => {
+        return (
+          <>
+            <Button
+              variant="secondary"
+             onClick={() => handlePress(params.row.name)}
+              size="sm"
+            >
+              {params.row.name}
+            </Button>
+
+          </>
+        );
+      },
+      editable: false,
     },
     {
       field: "priority",
@@ -150,6 +168,17 @@ function Projectstable(props) {
   const handleClose = () => {
     setShow(false);
   };
+
+  const handlePress = (name) => {
+
+    props.setAlt(name)
+    props.setAltTable(true)
+    navigate('/tickets')
+
+    //set a condition to true
+    //set table to new table
+    //navigate to ticket page
+  }
 
 
 

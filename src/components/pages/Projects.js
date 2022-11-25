@@ -16,7 +16,7 @@ import { db } from "../firebase";
 //do not be confused with the naming the idea was to use props to update the setprojects of this component in the projects table component
 //this was done on delete and on edit by the way 
 
-function Projects() {
+function Projects(props) {
   useEffect(() => {
     const fetchData = async () => {
       let list = [];
@@ -29,6 +29,7 @@ function Projects() {
       } catch (error) {
         console.log(error);
       }
+      props.setAltTable(false)
     };
 
     fetchData();
@@ -93,6 +94,8 @@ function Projects() {
           <Grid item xs={12} md={12} lg={12}>
             <Projectstable
             setProjects={setProjects}
+            setAlt={props.setAlt}
+            setAltTable={props.setAltTable}
              />
           </Grid>
         </Grid>

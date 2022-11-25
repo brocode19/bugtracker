@@ -24,7 +24,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-function Tickets() {
+function Tickets(props) {
   useEffect(() => {
     const fetchData = async () => {
       let list = [];
@@ -66,13 +66,13 @@ function Tickets() {
   const options = projectUsers;
   const [projects, setProjects] = useState([]);
   const projectItems = projects.map(item => item.name);
-  console.log(projectItems);
+  const tableState = props.altTable;
 
-
-
-
+  console.log(tableState);
 
   const [tickets, setTickets] = useState([]);
+  const altTickets = tickets.filter(item => item.projectName === props.alt  )
+  
   const totalTickets = tickets.length;
   const highStatus = tickets.filter(
     (project) => project.status === "high"
@@ -469,7 +469,7 @@ function Tickets() {
             </Modal>
             <Box sx={{ py: 2, height: 450, backgroundColor: "white" }}>
               <DataGrid
-                rows={tickets}
+                rows={tableState ? altTickets: tickets}
                 columns={columns.concat(actionColumn)}
                 pageSize={5}
                 rowsPerPageOptions={[5]}

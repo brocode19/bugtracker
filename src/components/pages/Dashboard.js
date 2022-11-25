@@ -9,8 +9,9 @@ import BarChat from "../Barchat/BarChat";
 import PieChart from "../PieChat/PieChart";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
-function Dashboard() {
+function Dashboard(props) {
   useEffect(() => {
     const fetchData = async () => {
       let list = [];
@@ -30,6 +31,7 @@ function Dashboard() {
         user.push({ id: doc.id, ...doc.data() });
         setTeamMember(user);
       });
+      props.setAltTable(false)
     };
 
     fetchData();
@@ -40,7 +42,8 @@ function Dashboard() {
   const date = new Date();
   const currentYear = date.getFullYear();
 
-  console.log(currentYear);
+
+
 
   const admin = teamMember.filter((item) => item.role === "admin").length;
   const developer = teamMember.filter(

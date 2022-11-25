@@ -18,7 +18,7 @@ import {  createUserWithEmailAndPassword } from "firebase/auth";
 import { async } from '@firebase/util';
 import { Box } from '@mui/material';
 
-function Admin() {
+function Admin(props) {
 
   useEffect(() => {
 
@@ -39,6 +39,7 @@ function Admin() {
         console.log(error);
         
       }
+      props.setAltTable(false)
     }
 
 
