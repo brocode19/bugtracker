@@ -332,7 +332,7 @@ function Dashboard(props) {
     <div className="pages mt-5">
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome back Tanashe
+          Hi, Welcome back Tinashe
         </Typography>
 
         <Grid container spacing={3}>
