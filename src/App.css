@@ -104,7 +104,7 @@ aside{
   display: inline-block;
   position: fixed;
   left: 0;
-  background-color: #F6F6F9;
+  background-color: white;
   border-right: 2px #E0E4E8 dotted;
 
 }
@@ -120,7 +120,6 @@ aside .top{
  justify-content: center;
  gap: 0.8rem;
  background-color: white;
- background-color: #F6F6F9;
  margin-top: 1rem;
 
 
@@ -128,7 +127,7 @@ aside .top{
 
 aside .logo{
   display: flex;
-  gap: 0.8rem;
+  /* gap: 0.8rem; */
 }
 
 aside .close{
@@ -140,7 +139,6 @@ aside .close{
 
 aside .sidebar{
   background-color: white;
-  background-color: #F6F6F9;
   position: relative;
   top: 5rem;
   display: flex;
@@ -168,6 +166,7 @@ aside .sidebar{
   align-items: center;
   position: fixed;
   width: 80vw;
+  z-index: 2;
 
 
 }
@@ -216,11 +215,12 @@ aside .sidebar{
   }
 
   aside{
+    background-color: white;
     display: none;
     width: 250px;
     left: -100px;
     animation: showMenu 400ms ease forwards;
-    z-index: 1;
+    z-index: 3;
   }
 
   @keyframes showMenu {
@@ -235,7 +235,8 @@ aside .sidebar{
   }
 
   .pages{
-    margin-top: 100px;
+    margin-top: 0;
+    margin-left: 0;
     
   }
   
